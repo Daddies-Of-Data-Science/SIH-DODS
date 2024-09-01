@@ -1,0 +1,1 @@
+//schma for researhers , startup and investors
