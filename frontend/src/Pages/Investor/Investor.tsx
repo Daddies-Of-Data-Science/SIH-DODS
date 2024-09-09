@@ -1,5 +1,3 @@
-import { collection, addDoc } from 'firebase/firestore';
-import { db } from "../../fireBaseConfig";
 import { Button } from '@material-tailwind/react';
 import { useState } from 'react';
 import StartupFilterModal from '../../components/investor/Startupfilter';

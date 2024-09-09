@@ -1,5 +1,6 @@
 import { initializeApp, getApp, getApps } from 'firebase/app';
 import { getFirestore } from 'firebase/firestore';
+import { getStorage } from 'firebase/storage';
 // import { getAnalytics } from 'firebase/analytics';
 
 
@@ -16,20 +17,26 @@ const firebaseConfig = {
 
 const app = !getApps().length ? initializeApp(firebaseConfig) : getApp();
 const db = getFirestore(app);
+const storage= getStorage(app);
 // const analytics = getAnalytics(app);
 
 
-// document.addEventListener("DOMContentLoaded", () => {
-//   const messageElement = document.createElement("div");
-//   messageElement.innerText = "Firebase has been successfully connected";
-//   messageElement.style.position = "fixed";
-//   messageElement.style.bottom = "10px";
-//   messageElement.style.right = "10px";
-//   messageElement.style.backgroundColor = "green";
-//   messageElement.style.color = "white";
-//   messageElement.style.padding = "10px";
-//   messageElement.style.borderRadius = "5px";
-//   document.body.appendChild(messageElement);
-// });
+document.addEventListener("DOMContentLoaded", () => {
+  const messageElement = document.createElement("div");
+  messageElement.innerText = "Firebase has been successfully connected";
+  messageElement.style.position = "fixed";
+  messageElement.style.bottom = "10px";
+  messageElement.style.right = "10px";
+  messageElement.style.backgroundColor = "green";
+  messageElement.style.color = "white";
+  messageElement.style.padding = "10px";
+  messageElement.style.borderRadius = "5px";
+  document.body.appendChild(messageElement);
 
-export { db };
+ 
+  setTimeout(() => {
+    document.body.removeChild(messageElement);
+  }, 10000); 
+});
+
+export { db , storage };

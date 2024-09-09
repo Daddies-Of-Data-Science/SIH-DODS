@@ -44,7 +44,7 @@ const HomePage: React.FC = () => {
       </div>
 
       {/* Section 2: Explore Research Projects Section */}
-      <div className="flex items-center justify-center bg-white">
+      {/* <div className="flex items-center justify-center bg-white">
         <section className="w-full">
           <div className="text-center md:mb-8 mt-4">
             <h2 className="md:text-5xl text-2xl font-bold text-gray-900 pt-10">
@@ -89,10 +89,10 @@ const HomePage: React.FC = () => {
             </div>
           </div>
         </section>
-      </div>
+      </div> */}
 
       {/* Section 3: Revolutionize Research Section */}
-      <div className="flex items-center justify-center bg-blue-50 py-10 mt-10">
+      <div className="flex items-center justify-center bg-white py-10 mt-10">
         <div className="grid grid-cols-1 md:grid-cols-2 w-full h-full gap-10">
           <div className="flex flex-col justify-center items-start px-8 md:px-24">
             <h2 className="text-4xl md:text-5xl font-bold text-gray-900">
