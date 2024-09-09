@@ -4,7 +4,7 @@ import { collection, addDoc } from "firebase/firestore";
 import { db } from "../../fireBaseConfig"; // Import the Firestore instance
 import * as Yup from "yup";
 
-// Validation schema using Yup
+
 const validationSchema = Yup.object({
   title: Yup.string().required("Required"),
   description: Yup.string().required("Required"),
@@ -30,7 +30,7 @@ const ProjectForm: React.FC = () => {
         const docRef = await addDoc(collection(db, "projects"), values);
         console.log("Document written with ID: ", docRef.id);
         alert("Research Paper Submitted Successfully");
-        resetForm(); // Reset the form fields
+        resetForm(); 
       } catch (e) {
         console.error("Error adding document: ", e);
         alert("Error submitting research paper. Please try again.");

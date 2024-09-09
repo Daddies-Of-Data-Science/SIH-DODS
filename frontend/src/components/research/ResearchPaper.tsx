@@ -161,7 +161,7 @@ const ResearchPapers: React.FC = () => {
                 {paper.collaborators.map((collaborator, index) => (
                   <div
                     key={index}
-                    className="w-8 h-8 rounded-full bg-gray-400 flex items-center justify-center text-white"
+                    className="w-8 h-8 rounded-full bg-blue-400 flex items-center justify-center text-white"
                   >
                     {collaborator.split(' ').map(word => word[0]).join('')}
                   </div>
