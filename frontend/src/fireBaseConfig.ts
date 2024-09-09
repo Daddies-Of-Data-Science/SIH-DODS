@@ -21,7 +21,7 @@ const db = getFirestore(app);
 // Display a message if Firebase is successfully connected
 document.addEventListener("DOMContentLoaded", () => {
   const messageElement = document.createElement("div");
-  messageElement.innerText = "Firebase has been successfully connected";
+  messageElement.innerText = "Database has been successfully connected";
   messageElement.style.position = "fixed";
   messageElement.style.bottom = "10px";
   messageElement.style.right = "10px";
