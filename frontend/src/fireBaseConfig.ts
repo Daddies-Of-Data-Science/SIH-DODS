@@ -1,23 +1,24 @@
-import { initializeApp } from 'firebase/app';
+import { initializeApp, getApp, getApps } from 'firebase/app';
+import { getFirestore } from 'firebase/firestore';
 import { getAnalytics } from 'firebase/analytics';
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
-  apiKey: "AIzaSyArnHu3CEkbKMVeNBfJi1FLy0coAHRMeKE",
-  authDomain: "sihdods.firebaseapp.com",
-  projectId: "sihdods",
-  storageBucket: "sihdods.appspot.com",
-  messagingSenderId: "5653921433",
-  appId: "1:5653921433:web:e532da0c68c37b21350208",
-  measurementId: "G-PPBX7SVDEG"
+  apiKey: "AIzaSyDiH3c0KZeIbt4ppBOFGiHeM8fR_Y1aSzY",
+  authDomain: "sih-dods.firebaseapp.com",
+  projectId: "sih-dods",
+  storageBucket: "sih-dods.appspot.com",
+  messagingSenderId: "159446482414",
+  appId: "1:159446482414:web:8a32dcdb34497ee25822ff",
+  measurementId: "G-LXY4JDXPHN"
 };
 
-// Initialize Firebase
-const app = initializeApp(firebaseConfig);
+// Initialize Firebase only if it has not been initialized before
+const app = !getApps().length ? initializeApp(firebaseConfig) : getApp();
+const db = getFirestore(app);
 const analytics = getAnalytics(app);
 
-// Optional: Display a message if Firebase is successfully connected
-console.log("Firebase has been successfully connected");
+// Display a message if Firebase is successfully connected
 document.addEventListener("DOMContentLoaded", () => {
   const messageElement = document.createElement("div");
   messageElement.innerText = "Firebase has been successfully connected";
@@ -30,3 +31,5 @@ document.addEventListener("DOMContentLoaded", () => {
   messageElement.style.borderRadius = "5px";
   document.body.appendChild(messageElement);
 });
+
+export { db };

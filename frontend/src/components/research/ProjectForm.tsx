@@ -1,23 +1,8 @@
 import React from "react";
 import { useFormik } from "formik";
-import { initializeApp } from "firebase/app";
-import { getFirestore, collection, addDoc } from "firebase/firestore";
+import { collection, addDoc } from "firebase/firestore";
+import { db } from "../../fireBaseConfig"; // Import the Firestore instance
 import * as Yup from "yup";
-
-// Your web app's Firebase configuration
-const firebaseConfig = {
-  apiKey: "AIzaSyArnHu3CEkbKMVeNBfJi1FLy0coAHRMeKE",
-  authDomain: "sihdods.firebaseapp.com",
-  projectId: "sihdods",
-  storageBucket: "sihdods.appspot.com",
-  messagingSenderId: "5653921433",
-  appId: "1:5653921433:web:e532da0c68c37b21350208",
-  measurementId: "G-PPBX7SVDEG"
-};
-
-// Initialize Firebase
-const app = initializeApp(firebaseConfig);
-const db = getFirestore(app);
 
 // Validation schema using Yup
 const validationSchema = Yup.object({
