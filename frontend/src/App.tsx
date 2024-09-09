@@ -1,10 +1,10 @@
 import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
-import HomePage from './Pages/Home/Home';
+import HomePage from './pages/Home/Home';
 // import IprPage from './pages/IprPage';
-import ResearchPage from './Pages/Research/Research'
+import ResearchPage from './pages/Research/Research'
 import { NavbarDefault } from './components/Navbar';
-import StartupPage from './Pages/Startup/Startup';
-import InvestorPage from './Pages/Investor/Investor';
+import StartupPage from './pages/Startup/Startup';
+import InvestorPage from './pages/Investor/Investor';
 
 function App() {
   return (
