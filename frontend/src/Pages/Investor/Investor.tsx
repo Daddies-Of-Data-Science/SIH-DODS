@@ -18,7 +18,7 @@ const Investor = () => {
         <div className="mx-auto px-8 flex flex-col md:flex-row items-center justify-between">
           {/* Text Content */}
           <div className="flex flex-col items-start max-w-lg">
-            <h1 className="text-5xl font-bold my-4 text-gray-800">
+            <h1 className="text-5xl font-bold my-4 text-gray-800 font-zilla">
               Welcome to Our Investor Platform: Your Gateway to Financial Insights
             </h1>
             <p className="text-lg text-gray-600 mb-8">
@@ -57,7 +57,7 @@ const Investor = () => {
         <div className=" mx-auto px-8 flex flex-col md:flex-row items-center justify-center">
           {/* Text Content */}
           <div className="flex flex-col items-start md:max-w-xl ">
-            <h2 className="text-5xl text-center md:text-left   md:text-6xl  font-bold mb-4 text-gray-800">
+            <h2 className="text-5xl text-center md:text-left md:text-6xl font-zilla font-bold mb-4 text-gray-800">
               Transforming Investment Insights
             </h2>
             <p className="text-lg text-gray-600 mb-4 text-center md:text-left">
@@ -80,10 +80,10 @@ const Investor = () => {
       </section>
 
       <section className="w-full py-16 bg-blue-50">
-        <div className="container mx-auto px-8">
+        <div className="px-5 md:mx-10">
           {/* Section Title */}
           <div className="text-center mb-12">
-            <h2 className="text-4xl font-bold text-gray-800">
+            <h2 className="text-5xl font-bold text-gray-800 font-zilla">
               POTENTIAL INVESTMENTS FOR YOU
             </h2>
             <p className="text-lg text-gray-600 mt-4">
