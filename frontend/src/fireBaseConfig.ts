@@ -1,8 +1,9 @@
 import { initializeApp, getApp, getApps } from 'firebase/app';
 import { getFirestore } from 'firebase/firestore';
+import { getStorage } from 'firebase/storage';
 // import { getAnalytics } from 'firebase/analytics';
 
-// Your web app's Firebase configuration
+
 const firebaseConfig = {
   apiKey: "AIzaSyDiH3c0KZeIbt4ppBOFGiHeM8fR_Y1aSzY",
   authDomain: "sih-dods.firebaseapp.com",
@@ -13,15 +14,16 @@ const firebaseConfig = {
   measurementId: "G-LXY4JDXPHN"
 };
 
-// Initialize Firebase only if it has not been initialized before
+
 const app = !getApps().length ? initializeApp(firebaseConfig) : getApp();
 const db = getFirestore(app);
+const storage= getStorage(app);
 // const analytics = getAnalytics(app);
 
-// Display a message if Firebase is successfully connected
+
 document.addEventListener("DOMContentLoaded", () => {
   const messageElement = document.createElement("div");
-  messageElement.innerText = "Database has been successfully connected";
+  messageElement.innerText = "Firebase has been successfully connected";
   messageElement.style.position = "fixed";
   messageElement.style.bottom = "10px";
   messageElement.style.right = "10px";
@@ -30,6 +32,11 @@ document.addEventListener("DOMContentLoaded", () => {
   messageElement.style.padding = "10px";
   messageElement.style.borderRadius = "5px";
   document.body.appendChild(messageElement);
+
+ 
+  setTimeout(() => {
+    document.body.removeChild(messageElement);
+  }, 10000); 
 });
 
-export { db };
+export { db , storage };
