@@ -3,16 +3,31 @@ import { collection, getDocs } from "firebase/firestore";
 import { db } from "../../fireBaseConfig";
 
 const ProjectList: React.FC = () => {
-  const [projects, setProjects] = useState<any[]>([]);
+  interface Project {
+    id: string;
+    title: string;
+    description: string;
+    authors: string;
+    abstract: string;
+    keywords: string;
+    submissionDate: string;
+  }
+  
+  const [projects, setProjects] = useState<Project[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
 
   useEffect(() => {
     const fetchProjects = async () => {
       try {
         const querySnapshot = await getDocs(collection(db, "projects"));
-        const projectList: any[] = querySnapshot.docs.map(doc => ({
+        const projectList: Project[] = querySnapshot.docs.map(doc => ({
           id: doc.id,
-          ...doc.data()
+          title: doc.data().title,
+          description: doc.data().description,
+          authors: doc.data().authors,
+          abstract: doc.data().abstract,
+          keywords: doc.data().keywords,
+          submissionDate: doc.data().submissionDate
         }));
         setProjects(projectList);
       } catch (error) {
@@ -40,8 +55,7 @@ const ProjectList: React.FC = () => {
             <p className="text-lg text-gray-600 mb-2"><strong>Authors:</strong> {project.authors}</p>
             <p className="text-lg text-gray-600 mb-2"><strong>Abstract:</strong> {project.abstract}</p>
             <p className="text-lg text-gray-600 mb-2"><strong>Keywords:</strong> {project.keywords}</p>
-            {/* Uncomment and format if you want to use the submission date
-            <p className="text-lg text-gray-600"><strong>Submission Date:</strong> {project.submissionDate?.toDate().toDateString()}</p> */}
+            <p className="text-lg text-gray-600"><strong>Submission Date:</strong> {project.submissionDate}</p>
           </li>
         ))}
       </ul>
