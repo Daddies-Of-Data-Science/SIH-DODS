@@ -1,8 +1,9 @@
-import React from "react";
 import { Button } from '@material-tailwind/react';
+import { useState } from 'react';
+import StartupFilterModal from '../../components/investor/Startupfilter';
 
 const Investor = () => {
-
+  const [isModalOpen, setIsModalOpen] = useState(false);
   const investments = [
     { name: 'CareForAll', image: 'https://via.placeholder.com/150', description: 'Health' },
     { name: 'Pie21.io', image: 'https://via.placeholder.com/150' , description: 'FoodTech' },
@@ -11,6 +12,84 @@ const Investor = () => {
     { name: 'Kang21', image: 'https://via.placeholder.com/150', description: 'Fitness' },
     { name: 'Reversify', image: 'https://via.placeholder.com/150', description: 'FinTech' },
   ];
+
+  // const startups = [
+  //   {
+  //     "name": "InnoTech",
+  //     "industry": "Technology",
+  //     "valuation": 50000000,
+  //     "fundingStage": "SERIES A"
+  //   },
+  //   {
+  //     "name": "HealthifyMe",
+  //     "industry": "Healthcare",
+  //     "valuation": 120000000,
+  //     "fundingStage": "SERIES B"
+  //   },
+  //   {
+  //     "name": "AgroRise",
+  //     "industry": "Agriculture",
+  //     "valuation": 30000000,
+  //     "fundingStage": "SEED"
+  //   },
+  //   {
+  //     "name": "FinGrowth",
+  //     "industry": "FinTech",
+  //     "valuation": 150000000,
+  //     "fundingStage": "SERIES C"
+  //   },
+  //   {
+  //     "name": "EcoVentures",
+  //     "industry": "Environment",
+  //     "valuation": 70000000,
+  //     "fundingStage": "SERIES A"
+  //   },
+  //   {
+  //     "name": "FoodieExpress",
+  //     "industry": "FoodTech",
+  //     "valuation": 90000000,
+  //     "fundingStage": "SERIES B"
+  //   },
+  //   {
+  //     "name": "EduPro",
+  //     "industry": "Education",
+  //     "valuation": 45000000,
+  //     "fundingStage": "PRE SEED"
+  //   },
+  //   {
+  //     "name": "GreenEnergy",
+  //     "industry": "Energy",
+  //     "valuation": 130000000,
+  //     "fundingStage": "SERIES A"
+  //   },
+  //   {
+  //     "name": "UrbanNest",
+  //     "industry": "Real Estate",
+  //     "valuation": 60000000,
+  //     "fundingStage": "SEED"
+  //   },
+  //   {
+  //     "name": "AutoBots",
+  //     "industry": "Automobile",
+  //     "valuation": 200000000,
+  //     "fundingStage": "SERIES C"
+  //   }
+  // ]
+
+  // const createStartup = async () => {
+  //   try {
+  //     for (const startup of startups) {
+  //       const docRef = await addDoc(collection(db, 'startups'), startup);
+  //       console.log(`Added ${docRef.id} : ${startup.name} to Firestore`);
+  //     }
+  //     alert('All startups have been added to Firestore successfully!');
+  //   } catch (error) {
+  //     console.error('Error adding startups to Firestore: ', error);
+  //   }
+  // };
+
+
+
 
   return (
     <div>
@@ -28,18 +107,18 @@ const Investor = () => {
             {/* Buttons */}
             <div className="flex flex-col gap-2">
               <div className="flex space-x-4">
-                <Button color="black" className="py-4 px-6" ripple={true}>
+                <Button color="black" className="py-4 px-6 text-xs" ripple={true}>
                   Explore Your Investments
                 </Button>
-                <Button variant="outlined" color="black" className="py-4 px-6 focus:ring-0" ripple={true}>
-                  Discover More
+                <Button onClick={() => setIsModalOpen(true)} variant="outlined" color="black" className="py-4 px-6 text-xs focus:ring-0" ripple={true}>
+                  Discover Startups
                 </Button>
               </div>
                 <Button variant="outlined" color="black" className="py-3 px-6 text-sm focus:ring-0" ripple={true}>
                   View Investor Dashboard
                 </Button>
             </div>
-
+            <StartupFilterModal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} />
           </div>
 
           {/* Image Content */}
