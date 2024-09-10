@@ -45,7 +45,7 @@ const ProjectList: React.FC = () => {
   }
 
   return (
-    <div className="container mx-auto p-6">
+    <div className=" bg-blue-50 p-6">
       <h1 className="text-3xl font-bold text-gray-800 mb-6">Submitted Projects</h1>
       <ul className="space-y-4">
         {projects.map(project => (
