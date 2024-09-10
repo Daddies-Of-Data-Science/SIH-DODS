@@ -1,4 +1,4 @@
-// src/components/MonetaryGrants.tsx
+
 import React from "react";
 
 const MonetaryGrants: React.FC = () => {
@@ -18,7 +18,7 @@ const MonetaryGrants: React.FC = () => {
           <div className="text-center">
             <span className="text-2xl font-bold">{totalAmount}</span> Lakhs
           </div>
-          {/* You can later add an actual chart library like D3.js for a pie chart */}
+         
         </div>
         <ul className="flex-1 ml-6 space-y-2">
           {grants.map((grant, idx) => (
