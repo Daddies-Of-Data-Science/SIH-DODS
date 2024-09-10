@@ -5,6 +5,7 @@ import { NavbarDefault } from './components/Navbar';
 import StartupPage from '../../frontend/src/pages/Startup/Startup';
 import InvestorPage from '../../frontend/src/pages/Investor/Investor';
 import HomePage from '../../frontend/src/pages/Home/Home';
+import Dashboard from './pages/Research/ResearchDashboard';
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
           <Route path="/" element={<HomePage />} />
           {/* <Route path="/ipr" element={<IprPage />} /> */}
           <Route path="/research" element={<ResearchPage />} />
+          <Route path="research/dashboard" element={<Dashboard/>} />
           <Route path="/startup" element={<StartupPage />} />
           <Route path="/investor" element={<InvestorPage />} /> 
         </Routes>
