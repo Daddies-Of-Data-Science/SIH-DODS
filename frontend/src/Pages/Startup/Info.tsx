@@ -6,6 +6,7 @@ import info5 from "../../assets/info_5.png";
 import info6 from "../../assets/info_6.png";
 import React, { useState } from 'react';
 import { Activity, DollarSign, Send } from 'lucide-react';
+import { Link } from "react-router-dom";
 
 function Info() {
   const [showSubmitForm, setShowSubmitForm] = useState(false);
@@ -46,8 +47,8 @@ function Info() {
     </div>
   );
   return (
-    <div className="bg-white">
-      <div className=" bg-white text-center flex justify-center content-center">
+    <div className="bg-[#FEFEFF]">
+      <div className=" bg-[#FEFEFF] text-center flex justify-center content-center">
         <div className="text-5xl p-[4%] lg:w-[70vw] font-zilla">
           Revolutionize Your Business with Innovative Startups
         </div>
@@ -83,10 +84,10 @@ function Info() {
           <div>
             <img className="py-2  h-[70px]" src={info4} />
           </div>
-          <div className="text-white font-zilla text-4xl pr-10 pb-4">
+          <div className="text-white font-zilla text-6xl pr-10 pb-4">
             Gujarat Startups
           </div>
-          <div className="text-gray-500 text-sm pb-4 ">
+          <div className="text-gray-500 text-lg pb-4 ">
             Based in the heart of the city, our directory showcases the most
             promising startups shaping the future of New York. Discover
             innovative solutions, pioneering technologies, and visionary
@@ -99,10 +100,10 @@ function Info() {
           <div>
             <img className="py-2  h-[70px]" src={info5} />
           </div>
-          <div className="text-white font-zilla text-4xl pr-10 pb-4">
+          <div className="text-white font-zilla text-6xl pr-10 pb-4">
             GN Group Startups
           </div>
-          <div className="text-gray-500 text-sm pb-4 overflow-hidden">
+          <div className="text-gray-500 text-lg pb-4 overflow-hidden">
             Headquartered in the global business hub, our platform features a
             diverse array of startups from the GN Group ecosystem. Explore
             cutting-edge technologies, disruptive business models, and
@@ -115,10 +116,14 @@ function Info() {
           <div>
             <img className="py-2  h-[70px]" src={info6} />
           </div>
-          <div className="text-white font-zilla text-4xl pb-4">
-            Gujarat Council Startups
+          <div className="text-white font-zilla text-6xl">
+            Gujarat 
           </div>
-          <div className="text-gray-500 text-sm pb-4">
+          <div className="text-white font-zilla text-5xl pb-4">
+          Council Startups 
+          </div>
+          
+          <div className="text-gray-500 text-lg pb-4">
             BImmerse yourself in the vibrant startup ecosystem of New York City.
             Our platform showcases the most promising ventures, innovative
             products, and visionary leaders that are shaping the future of the
@@ -169,9 +174,11 @@ function Info() {
                 Gain exclusive access to curated startup profiles, pitch decks,
                 and investment opportunities.
               </p>
+              <Link to="/investor">
               <button className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">
                 Apply Now
               </button>
+              </Link>
             </div>
           </div>
 
