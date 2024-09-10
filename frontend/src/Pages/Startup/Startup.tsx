@@ -3,7 +3,7 @@ import Info from "./Info";
 
 const Startup = () => {
   return (
-    <div className="bg-blue-50 min-h-screen pt-[5%]">
+    <div className="bg-blue-50 min-h-screen pt-[5%] font-outfit">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-10">
         <div className="lg:grid lg:grid-cols-2 lg:gap-8">
           {/* Text Section */}

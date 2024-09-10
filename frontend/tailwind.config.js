@@ -6,6 +6,7 @@ module.exports = withMT({
     extend: {
       fontFamily: {
         zilla: ['"Zilla Slab"', 'serif'],
+        outfit: ['Outfit', 'sans-serif'], // Add Outfit font family
       },
     },
   },
