@@ -6,6 +6,7 @@ import StartupPage from '../../frontend/src/pages/Startup/Startup';
 import InvestorPage from '../../frontend/src/pages/Investor/Investor';
 import HomePage from '../../frontend/src/pages/Home/Home';
 import Dashboard from './pages/Research/ResearchDashboard';
+import StartupDashboard from './Pages/Startup/Dashboard/Dashboard';
 
 function App() {
   return (
@@ -20,6 +21,7 @@ function App() {
           <Route path="/research" element={<ResearchPage />} />
           <Route path="research/dashboard" element={<Dashboard/>} />
           <Route path="/startup" element={<StartupPage />} />
+          <Route path="/startup/dashboard" element={< StartupDashboard/>} />
           <Route path="/investor" element={<InvestorPage />} /> 
         </Routes>
       </div>
