@@ -37,7 +37,7 @@ const MonetaryGrants: React.FC = () => {
       const mappedGrants = grantsData.map(grant => ({
         source: grant.projectId, 
         amount: grant.grantAmount / 100000,  
-        color: 'bg-blue-500',  
+        color: 'bg-orange-500',  
       }));
 
       setGrants(mappedGrants);
