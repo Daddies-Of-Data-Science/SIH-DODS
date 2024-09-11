@@ -9,6 +9,9 @@ module.exports = withMT({
         bungee: ['"Bungee"', 'sans-serif'],
         outfit: ['Outfit', 'sans-serif'], // Add Outfit font family
       },
+      boxShadow: {
+        'custom': '0 4px 8px rgba(0, 0, 0, 0.05), 0 -4px 8px rgba(0, 0, 0, 0.1), 4px 0 8px rgba(0, 0, 0, 0.1), -4px 0 8px rgba(0, 0, 0, 0.1)',
+      },
     },
   },
   plugins: [],

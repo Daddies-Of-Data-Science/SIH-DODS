@@ -1,9 +1,14 @@
 import { Button } from '@material-tailwind/react';
 import { useState } from 'react';
-import StartupFilterModal from '../../components/investor/Startupfilter';
+import StartupFilterModal from '../../components/investor/StartupFilter';
+import { useNavigate } from 'react-router-dom';
+import ViewInvestmentsModal from '../../components/investor/ViewInvestmentsModal';
 
 const Investor = () => {
+  const navigate = useNavigate();
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isViewInvestmentModalOpen, setIsViewInvestmentModalOpen] = useState(false);
+
   const investments = [
     { name: 'CareForAll', image: 'https://via.placeholder.com/150', description: 'Health' },
     { name: 'Pie21.io', image: 'https://via.placeholder.com/150' , description: 'FoodTech' },
@@ -95,7 +100,7 @@ const Investor = () => {
     <div>
       <section className="w-full min-h-screen py-4 flex items-center justify-center bg-blue-50">
         <div className="mx-auto px-8 flex flex-col md:flex-row items-center justify-between">
-          {/* Text Content */}
+     
           <div className="flex flex-col items-start max-w-lg">
             <h1 className="text-5xl font-bold my-4 text-gray-800 font-zilla">
               Welcome to Our Investor Platform: Your Gateway to Financial Insights
@@ -104,24 +109,24 @@ const Investor = () => {
               Unlock Great Investment Opportunites and A Comprehensive Investor Dashboard Offering Insightful Visualizations
             </p>
 
-            {/* Buttons */}
             <div className="flex flex-col gap-2">
               <div className="flex space-x-4">
-                <Button color="black" className="py-4 px-6 text-xs" ripple={true}>
+                <Button onClick={() => setIsViewInvestmentModalOpen(true)} color="blue" className="py-4 px-6 text-xs" ripple={true}>
                   Explore Your Investments
                 </Button>
-                <Button onClick={() => setIsModalOpen(true)} variant="outlined" color="black" className="py-4 px-6 text-xs focus:ring-0" ripple={true}>
+                <Button onClick={() => setIsModalOpen(true)} color="white" className="py-4 px-6 text-xs text-blue-500 focus:ring-0" ripple={true}>
                   Discover Startups
                 </Button>
               </div>
-                <Button variant="outlined" color="black" className="py-3 px-6 text-sm focus:ring-0" ripple={true}>
+                <Button onClick={() => {navigate('/investor/dashboard')}} color="white" className="py-3 px-6 text-sm focus:ring-0 text-blue-500" ripple={true}>
                   View Investor Dashboard
                 </Button>
             </div>
             <StartupFilterModal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} />
+            <ViewInvestmentsModal isOpen={isViewInvestmentModalOpen} onClose={() => setIsViewInvestmentModalOpen(false)} />
           </div>
 
-          {/* Image Content */}
+        
           <div className="mt-8 md:mt-0 md:ml-24">
             <img
               src="https://via.placeholder.com/600"  // Replace with the actual image URL
@@ -134,7 +139,7 @@ const Investor = () => {
 
       <section className="w-full py-16">
         <div className=" mx-auto px-8 flex flex-col md:flex-row items-center justify-center">
-          {/* Text Content */}
+      
           <div className="flex flex-col items-start md:max-w-xl ">
             <h2 className="text-5xl text-center md:text-left md:text-6xl font-zilla font-bold mb-4 text-gray-800">
               Transforming Investment Insights
@@ -147,7 +152,7 @@ const Investor = () => {
             </p>
           </div>
 
-          {/* Placeholder Image */}
+     
           <div className="mt-8 md:mt-0 md:ml-36">
             <img
               src="https://via.placeholder.com/500x400.png?text=Investment+Insights"
@@ -160,7 +165,7 @@ const Investor = () => {
 
       <section className="w-full py-16 bg-blue-50">
         <div className="px-5 md:mx-10">
-          {/* Section Title */}
+      
           <div className="text-center mb-12">
             <h2 className="text-5xl font-bold text-gray-800 font-zilla">
               POTENTIAL INVESTMENTS FOR YOU
@@ -170,7 +175,6 @@ const Investor = () => {
             </p>
           </div>
 
-          {/* Investment Cards using Flexbox */}
           <div className="flex flex-wrap justify-center gap-8">
             {investments.map((investment, index) => (
               <div

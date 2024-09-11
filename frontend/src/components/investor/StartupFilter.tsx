@@ -1,10 +1,11 @@
-// components/StartupModal.tsx
 import React, { useEffect, useState } from 'react';
-import { Dialog, DialogHeader, DialogBody, DialogFooter, Input, Button, Spinner } from '@material-tailwind/react';
+import { Dialog, DialogHeader, DialogBody, DialogFooter, Button, Spinner } from '@material-tailwind/react';
 import { collection, getDocs } from 'firebase/firestore';
-import { db } from "../../fireBaseConfig"; // Adjust the import based on your file structure
+import { db } from "../../fireBaseConfig";
+import InvestModal from './InvestModal';
 
 interface Startup {
+  id: string;
   name: string;
   industry: string;
   valuation: number;
@@ -23,13 +24,16 @@ const StartupFilterModal = (props: StartupModalProps) => {
   const [searchQuery, setSearchQuery] = useState<string>('');
   const [selectedIndustry, setSelectedIndustry] = useState<string>('All');
   const [loading, setLoading] = useState<boolean>(false);
+  const [isInvestmentModalOpen, setInvestmentModalOpen] = useState<boolean>(false);
+  const [selectedStartup, setSelectedStartup] = useState<Startup | null>(null);
 
   const fetchStartups = async () => {
     setLoading(true);  // Start loading
     try {
-      const querySnapshot = await getDocs(collection(db, 'startups'));
-      const startupsData = querySnapshot.docs.map(doc => doc.data() as Startup);
+      const query = await getDocs(collection(db, 'startups'));
+      const startupsData = query.docs.map((doc) => ({ id: doc.id, ...doc.data()} as Startup));
       setStartups(startupsData);
+      console.log(startupsData);
       setFilteredStartups(startupsData);
     } catch (error) {
       console.error('Error fetching startups: ', error);
@@ -78,7 +82,7 @@ const StartupFilterModal = (props: StartupModalProps) => {
             placeholder="Search startups by name..."
             value={searchQuery}
             onChange={handleSearch}
-            className="px-4 py-2 border border-gray-300 rounded-lg w-full"
+            className="px-4 py-2 border focus:outline-light-blue-500  border-gray-300 rounded-lg w-full"
         />
 
         {/* Filter Tags */}
@@ -89,6 +93,7 @@ const StartupFilterModal = (props: StartupModalProps) => {
               variant={selectedIndustry === industry ? "filled" : "outlined"}
               onClick={() => filterIndustry(industry === 'All' ? '' : industry)}
               className='py-1 px-2 text-[10px]'
+              color='blue'
             >
               {industry}
             </Button>
@@ -97,7 +102,6 @@ const StartupFilterModal = (props: StartupModalProps) => {
 
         
         {loading ? (
-          // Loading Spinner
           <div className="flex justify-center items-center gap-3 h-full">
             <div className='text-black'>
                 <Spinner className="h-8 w-8" />
@@ -107,8 +111,22 @@ const StartupFilterModal = (props: StartupModalProps) => {
         ) : (
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4 pb-3">
           {filteredStartups.map((startup, index) => (
-            <div key={index} className="flex flex-col items-start bg-gray-100 p-4 rounded-lg shadow-md">
-              <h3 className="text-xl font-semibold text-gray-700">{startup.name}</h3>
+            <div key={index} className="relative flex flex-col items-start bg-gray-100 p-4 rounded-lg shadow-md">
+              <div className='w-full flex flex-row justify-between items-center'>
+                <h3 className="text-xl font-semibold text-gray-700">{startup.name}</h3>
+                <Button 
+                  color="green"
+                  onClick={() => {
+                    // onClose();
+                    setSelectedStartup(startup);
+                    setInvestmentModalOpen(true);
+                  }}
+                  ripple={true}
+                  className='px-2 py-2'
+                >
+                  Invest
+                </Button>
+              </div>
               <p className="text-sm text-gray-500 mt-2">Industry: {startup.industry}</p>
               <p className="text-sm text-gray-500">Valuation: ₹{startup.valuation.toLocaleString()}</p>
               <p className="text-sm text-gray-500">Funding Stage: {startup.fundingStage}</p>
@@ -119,13 +137,21 @@ const StartupFilterModal = (props: StartupModalProps) => {
       </DialogBody>
       <DialogFooter className='flex justify-center'>
         <Button
-          variant="outlined"
-          color="black"
+          color="blue"
           onClick={onClose}
           ripple={true}
         >
           Close
         </Button>
+        <InvestModal 
+          isOpen={isInvestmentModalOpen} 
+          onClose={() => {
+            setInvestmentModalOpen(false);
+            onClose();
+          }} 
+          fetchStartups={fetchStartups} 
+          startup={selectedStartup} 
+        />
       </DialogFooter>
     </Dialog>
   );
