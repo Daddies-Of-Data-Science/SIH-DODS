@@ -7,7 +7,7 @@ import TeamUpdates from "./TeamUpdates";
 
 const DashboardContent: React.FC = () => {
   return (
-    <div className="p-6 bg-gray-100 flex flex-col space-y-6">
+    <div className="p-6 flex flex-col space-y-6">
       <div className="flex flex-col lg:flex-row justify-between items-start space-y-4 lg:space-y-0">
         <div className="flex flex-col">
           <h2 className="text-2xl">Welcome, Aaditya</h2>
