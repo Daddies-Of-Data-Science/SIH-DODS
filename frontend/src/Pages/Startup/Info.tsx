@@ -144,7 +144,7 @@ function Info() {
           opportunities
         </div>
       </div>
-      <div className="min-h-screen bg-gray-100 p-8">
+      <div className="bg-gray-100 p-8">
         <div className="max-w-6xl mx-auto space-y-8">
 
 
@@ -182,7 +182,7 @@ function Info() {
             </div>
           </div>
 
-          <div className="bg-navy-800 text-white p-6 rounded-lg shadow">
+          {/* <div className="bg-navy-800 text-white p-6 rounded-lg shadow">
             <h2 className="text-2xl font-semibold mb-4">
               Unlock the Power of Innovation
             </h2>
@@ -203,7 +203,7 @@ function Info() {
                 Submit Startup
               </button>
             </div>
-          </div>
+          </div> */}
 
           <div className="bg-white p-6 rounded-lg shadow">
             <h2 className="text-2xl font-semibold mb-4">
@@ -218,9 +218,9 @@ function Info() {
 
         {showSubmitForm && <SubmitForm />}
       </div>
-      <div className="text-5xl">
+      {/* <div className="text-5xl">
         WORK IN PROGRESS....
-      </div>
+      </div> */}
     </div>
   );
 }
