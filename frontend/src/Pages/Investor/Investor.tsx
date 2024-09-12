@@ -1,6 +1,6 @@
 import { Button } from '@material-tailwind/react';
 import { useState } from 'react';
-import StartupFilterModal from '../../components/investor/Startupfilter';
+import StartupFilterModal from '../../components/investor/StartupFilter';
 
 const Investor = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);

@@ -1,6 +1,6 @@
 // components/StartupModal.tsx
 import React, { useEffect, useState } from 'react';
-import { Dialog, DialogHeader, DialogBody, DialogFooter, Input, Button, Spinner } from '@material-tailwind/react';
+import { Dialog, DialogHeader, DialogBody, DialogFooter, Button, Spinner } from '@material-tailwind/react';
 import { collection, getDocs } from 'firebase/firestore';
 import { db } from "../../fireBaseConfig"; // Adjust the import based on your file structure
 
