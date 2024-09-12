@@ -7,9 +7,9 @@ import InvestorPage from '../../frontend/src/Pages/Investor/Investor';
 import HomePage from '../../frontend/src/Pages/Home/Home';
 import Dashboard from './Pages/Research/ResearchDashboard';
 import StartupDashboard from './Pages/Startup/Dashboard/Dashboard';
-import InvestorDasboard from './Pages/Investor/InvestorDasboard';
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import InvestorDashboard from './Pages/Investor/InvestorDasboard';
 
 function App() {
   return (
@@ -39,7 +39,7 @@ function App() {
             <Route path="/startup" element={<StartupPage />} />
             <Route path="/startup/dashboard" element={<StartupDashboard />} />
             <Route path="/investor" element={<InvestorPage />} />
-            <Route path="/investor/dashboard" element={<InvestorDasboard />} />
+            <Route path="/investor/dashboard" element={<InvestorDashboard />} />
           </Routes>
         </div>
         
