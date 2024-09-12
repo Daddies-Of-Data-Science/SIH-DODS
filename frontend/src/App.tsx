@@ -9,7 +9,7 @@ import Dashboard from './Pages/Research/ResearchDashboard';
 import StartupDashboard from './Pages/Startup/Dashboard/Dashboard';
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import InvestorDashboard from './Pages/Investor/InvestorDasboard';
+import InvestorDashboard from './Pages/Investor/InvestorDashboard';
 
 function App() {
   return (
