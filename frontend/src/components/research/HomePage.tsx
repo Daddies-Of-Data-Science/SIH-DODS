@@ -4,7 +4,7 @@ import ProjectForm from "./ProjectForm";
 const HomePage: React.FC = () => {
   const handleDashboardClick = () => {
     console.log("Redirecting to dashboard...");
-    window.location.href = "/research/dashboard";
+    window.location.href = "/research/dashboard/testing";
   };
 
   const [isFormVisible, setFormVisible] = useState(false);
