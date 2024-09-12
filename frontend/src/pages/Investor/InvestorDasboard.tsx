@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from 'react';
-import { PieChart, Pie, Cell, Tooltip, Legend, LineChart, Line, XAxis, YAxis, CartesianGrid, AreaChart, Area, ResponsiveContainer } from 'recharts';
+import { useEffect, useState } from 'react';
+import { PieChart, Pie, Cell, Tooltip, Legend, LineChart, Line, XAxis, YAxis, CartesianGrid,  ResponsiveContainer } from 'recharts';
 import { Button } from '@material-tailwind/react';
 import StartupFilterModal from '../../components/investor/StartupFilter';
 import { getDocs, collection } from 'firebase/firestore';
@@ -59,13 +59,13 @@ const lineData = [
 { day: 30, value: 180 },
 ];
 
-const areaData = [
-{ year: 2010, Education: 40, Technology: 50, Finance: 30, Agriculture: 20 },
-{ year: 2012, Education: 50, Technology: 60, Finance: 40, Agriculture: 25 },
-{ year: 2014, Education: 60, Technology: 70, Finance: 55, Agriculture: 35 },
-{ year: 2016, Education: 70, Technology: 80, Finance: 65, Agriculture: 50 },
-{ year: 2018, Education: 90, Technology: 100, Finance: 75, Agriculture: 65 },
-];
+// const areaData = [
+// { year: 2010, Education: 40, Technology: 50, Finance: 30, Agriculture: 20 },
+// { year: 2012, Education: 50, Technology: 60, Finance: 40, Agriculture: 25 },
+// { year: 2014, Education: 60, Technology: 70, Finance: 55, Agriculture: 35 },
+// { year: 2016, Education: 70, Technology: 80, Finance: 65, Agriculture: 50 },
+// { year: 2018, Education: 90, Technology: 100, Finance: 75, Agriculture: 65 },
+// ];
 
 const notifications = [
     {
@@ -180,7 +180,7 @@ const COLORS = ['#0088FE', '#00C49F', '#FFBB28'];
                     dataKey="value"
                     label={({ name, percent }) => `${name}: ${(percent * 100).toFixed(2)}%`}
                   >
-                    {pieData.map((entry, index) => (
+                    {pieData.map(( index:any) => (
                       <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
                     ))}
                   </Pie>
