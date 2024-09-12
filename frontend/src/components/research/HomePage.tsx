@@ -1,11 +1,8 @@
 import React, { useState } from "react";
 import ProjectForm from "./ProjectForm";
+import { Link } from "react-router-dom";
 
 const HomePage: React.FC = () => {
-  const handleDashboardClick = () => {
-    console.log("Redirecting to dashboard...");
-    window.location.href = "/research/dashboard/testing";
-  };
 
   const [isFormVisible, setFormVisible] = useState(false);
 
@@ -28,12 +25,12 @@ const HomePage: React.FC = () => {
           <p className="text-lg md:text-xl text-gray-600 mb-8">
             Seamless Project Submission, Tracking, and Detailed Overviews
           </p>
-          <button
-            onClick={handleDashboardClick}
+          <Link
+           to="/dashboard"
             className="px-6 py-3 bg-blue-600 text-white text-base md:text-lg font-semibold rounded-lg hover:bg-blue-700 transition duration-200"
           >
             View Dashboard
-          </button>
+          </Link>
         </div>
 
         <div className="absolute top-10 left-10 h-20 w-20 md:h-40 md:w-40 rounded-full bg-blue-300 opacity-80" />
