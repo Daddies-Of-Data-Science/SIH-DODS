@@ -35,7 +35,7 @@ function App() {
             <Route path="/" element={<HomePage />} />
             {/* <Route path="/ipr" element={<IprPage />} /> */}
             <Route path="/research" element={<ResearchPage />} />
-            <Route path="research/dashboard" element={<Dashboard/>} />
+            <Route path="/research/dashboard" element={<Dashboard/>} />
             <Route path="/startup" element={<StartupPage />} />
             <Route path="/startup/dashboard" element={<StartupDashboard />} />
             <Route path="/investor" element={<InvestorPage />} />
