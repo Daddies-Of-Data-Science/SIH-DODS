@@ -4,8 +4,7 @@ import info3 from "../../assets/info_3.png";
 import info4 from "../../assets/info_4.png";
 import info5 from "../../assets/info_5.png";
 import info6 from "../../assets/info_6.png";
-import React, { useState } from 'react';
-import { Activity, DollarSign, Send } from 'lucide-react';
+import  { useState } from 'react';
 import { Link } from "react-router-dom";
 
 function Info() {
@@ -23,7 +22,7 @@ function Info() {
           <textarea
             className="w-full p-2 border rounded"
             placeholder="Description"
-            rows="4"
+            rows={4}
           />
           <input className="w-full p-2 border rounded" placeholder="Website" />
           <input

@@ -1,8 +1,10 @@
 import { Button } from '@material-tailwind/react';
 import { useState } from 'react';
 import StartupFilterModal from '../../components/investor/StartupFilter';
+
 import { useNavigate } from 'react-router-dom';
 import ViewInvestmentsModal from '../../components/investor/ViewInvestmentsModal';
+
 
 const Investor = () => {
   const navigate = useNavigate();

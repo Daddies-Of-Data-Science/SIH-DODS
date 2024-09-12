@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
+
 import { LineChart, Line, PieChart, Pie, Cell, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
-import { Sun, Moon, Search, Bell } from 'lucide-react';
+import {  Search, Bell } from 'lucide-react';
 
 const mockValuationData = [
   { day: 1, value: 15000 },
@@ -21,14 +21,9 @@ const equityData = [
 const COLORS = ['#0088FE', '#00C49F', '#FFBB28'];
 
 const StartupDashboard = () => {
-  const [isDarkMode, setIsDarkMode] = useState(false);
-
-  const toggleTheme = () => {
-    setIsDarkMode(!isDarkMode);
-  };
 
   return (
-    <div className={`p-6 pt-[15vh] ${isDarkMode ? 'dark' : ''} bg-[#F0F0F0] font-outfit`}>
+    <div className={`p-6 pt-[15vh] bg-[#F0F0F0] font-outfit`}>
       <div className="flex justify-between items-center mb-6">
         <div className="flex space-x-4">
           <button className="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600">Dashboard</button>
@@ -80,7 +75,7 @@ const StartupDashboard = () => {
           <ResponsiveContainer width="100%" height={200}>
             <PieChart>
               <Pie data={equityData} dataKey="value" nameKey="name" cx="50%" cy="50%" outerRadius={80}>
-                {equityData.map((entry, index) => (
+                {equityData.map((index:any) => (
                   <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
                 ))}
               </Pie>
