@@ -140,12 +140,12 @@ const Home: React.FC = () => {
                 progress, with all your data in one place.
               </p>
 
-              <Link
-                to="/collaboration"
+              <a
+                href="https://collaborative-sih-docs.vercel.app/sign-in"
                 className="bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700 transition"
               >
                 Get Started
-              </Link>
+              </a>
             </div>
           </div>
         </div>
