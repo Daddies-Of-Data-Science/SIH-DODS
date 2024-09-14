@@ -7,6 +7,7 @@ interface Investment {
   startupId: string;
   startupName: string;
   investmentAmount: number;
+  status: string
 }
 
 interface InvestmentsModalProps {
@@ -34,7 +35,7 @@ const ViewInvestmentsModal = ({ isOpen, onClose }: InvestmentsModalProps) => {
     const loadInvestments = async () => {
       setLoading(true);
       const allInvestments = await fetchInvestments();
-      setInvestments(allInvestments);
+      setInvestments(allInvestments.filter(inv => inv.status === "APPROVED"));
       setLoading(false);
     };
 

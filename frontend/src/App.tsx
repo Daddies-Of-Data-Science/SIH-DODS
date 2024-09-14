@@ -1,4 +1,4 @@
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route} from 'react-router-dom';
 // import IprPage from './pages/IprPage';
 import ResearchPage from './Pages/Research/Research'
 import { NavbarDefault } from './components/Navbar';
@@ -11,13 +11,16 @@ import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import InvestorDashboard from './Pages/Investor/InvestorDashboard';
 import IPR from "./Pages/IPR/IPR"
-//comment for aryan raand on signal
+import ScrollToTop from './components/ScrollToTop';
+import AdminPage from './Pages/Admin/Admin';
+
+
 function App() {
   return (
     <>
       <ToastContainer
         position="bottom-right"
-        autoClose={1000}
+        autoClose={4000}
         hideProgressBar={false}
         newestOnTop={false}
         closeOnClick
@@ -31,6 +34,7 @@ function App() {
         <div className='md:fixed w-full z-10 md:mt-3'>
           <NavbarDefault/>
         </div>
+        <ScrollToTop />
         <div className='md:relative'>
           <Routes>
             <Route path="/" element={<HomePage />} />
@@ -41,6 +45,7 @@ function App() {
             <Route path="/startup/dashboard" element={<StartupDashboard />} />
             <Route path="/investor" element={<InvestorPage />} />
             <Route path="/investor/dashboard" element={<InvestorDashboard />} />
+            <Route path="/admin" element={<AdminPage />} />
           </Routes>
         </div>
         

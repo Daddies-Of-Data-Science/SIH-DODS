@@ -173,42 +173,7 @@ const IPR = () => {
             )}
           </Formik>
         </div>
-
-        <div className="bg-white p-6 rounded-lg shadow-md">
-          <h2 className="text-2xl font-semibold mb-4 text-gray-800">All Applications</h2>
-          <div className="overflow-x-auto">
-            <table className="w-full table-auto">
-              <thead>
-                <tr className="bg-gray-200 text-gray-600 uppercase text-sm leading-normal">
-                  <th className="py-3 px-6 text-left">Title</th>
-                  <th className="py-3 px-6 text-left">Type</th>
-                  <th className="py-3 px-6 text-left">Status</th>
-                  <th className="py-3 px-6 text-left">Actions</th>
-                </tr>
-              </thead>
-              <tbody className="text-gray-600 text-sm font-light">
-                {applications.map((app) => (
-                  <tr key={app.id} className="border-b border-gray-200 hover:bg-gray-100">
-                    <td className="py-3 px-6 text-left whitespace-nowrap">{app.title}</td>
-                    <td className="py-3 px-6 text-left">{app.type}</td>
-                    <td className="py-3 px-6 text-left">{app.status}</td>
-                    <td className="py-3 px-6 text-left">
-                      <select
-                        onChange={(e) => updateStatus(app.id, e.target.value)}
-                        className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
-                      >
-                        <option value="">Update Status</option>
-                        <option value="Approved">Approve</option>
-                        <option value="Rejected">Reject</option>
-                        <option value="Under Review">Under Review</option>
-                      </select>
-                    </td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
-        </div>
+        
       </div>
     </div>
   );
