@@ -21,7 +21,7 @@ const validCredentials = { username: 'admin', password: 'password' };
 
 // Landing Page Component
 const LandingPage = ({ onLogin }) => (
-  <div className="min-h-screen flex flex-col justify-between bg-gradient-to-br from-blue-500 to-purple-600 text-white">
+  <div className="min-h-screen flex flex-col justify-between bg-blue-50 text-black">
     <div className="container mx-auto px-4 py-12">
       <header className="text-center mb-12">
         <h1 className="text-5xl font-bold mb-4">IPR Management System</h1>
@@ -55,7 +55,7 @@ const LandingPage = ({ onLogin }) => (
         <div className="bg-white p-8 rounded-lg shadow-lg">
           <h2 className="text-2xl font-semibold mb-6 text-gray-800">Login to Access IPR System</h2>
           <Formik
-            initialValues={{ username: '', password: '' }}
+            initialValues={{ username: 'admin', password: 'password' }}
             validationSchema={loginValidationSchema}
             onSubmit={(values, { setSubmitting, setErrors }) => {
               if (values.username === validCredentials.username && values.password === validCredentials.password) {

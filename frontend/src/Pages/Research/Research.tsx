@@ -1,12 +1,11 @@
 
-import HomePage from "../../components/research/HomePage";
-import ProjectList from "../../components/research/ProjectList";
-import ResearchPapers from "../../components/research/ResearchPaper";
+import HomePage from "../../Components/research/HomePage";
+import ResearchPapers from "../../Components/research/ResearchPaper";
 
 const Research = () => {
   return <div>
     <HomePage/>
-    <ProjectList/>
+    {/* <ProjectList/> */}
     <ResearchPapers/>
   </div>;
 };

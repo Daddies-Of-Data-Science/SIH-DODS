@@ -1,33 +1,37 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from "react-router-dom";
-import { getFirestore, collection, addDoc, getDocs } from 'firebase/firestore';
+import { collection, addDoc, getDocs } from 'firebase/firestore';
 import {db} from '../../fireBaseConfig';
 // Initialize Firebase (replace with your config)
 
 
-const FeatureCard = ({ icon: Icon, title, description }) => (
-  <div className="bg-white p-6 rounded-lg shadow-md flex flex-col items-center text-center">
-    <Icon className="h-12 w-12 text-blue-500 mb-2" />
-    <h3 className="text-xl font-semibold mb-2">{title}</h3>
-    <p className="text-gray-600">{description}</p>
-  </div>
-);
+// const FeatureCard = ({ icon: Icon, title, description }) => (
+//   <div className="bg-white p-6 rounded-lg shadow-md flex flex-col items-center text-center">
+//     <Icon className="h-12 w-12 text-blue-500 mb-2" />
+//     <h3 className="text-xl font-semibold mb-2">{title}</h3>
+//     <p className="text-gray-600">{description}</p>
+//   </div>
+// );
 
-const StartupCard = ({ title, description, icon: Icon }) => (
-  <div className="bg-black text-white p-6 rounded-lg shadow-md h-full flex flex-col">
-    <Icon className="h-16 w-16 text-blue-400 mb-4" />
-    <h3 className="text-2xl font-bold mb-2">{title}</h3>
-    <p className="text-gray-300 flex-grow">{description}</p>
-    <button className="text-blue-400 mt-4 flex items-center">
-      Learn more 
-      <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 ml-2" viewBox="0 0 20 20" fill="currentColor">
-        <path fillRule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clipRule="evenodd" />
-      </svg>
-    </button>
-  </div>
-);
+// const StartupCard = ({ title, description, icon: Icon }) => (
+//   <div className="bg-black text-white p-6 rounded-lg shadow-md h-full flex flex-col">
+//     <Icon className="h-16 w-16 text-blue-400 mb-4" />
+//     <h3 className="text-2xl font-bold mb-2">{title}</h3>
+//     <p className="text-gray-300 flex-grow">{description}</p>
+//     <button className="text-blue-400 mt-4 flex items-center">
+//       Learn more 
+//       <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 ml-2" viewBox="0 0 20 20" fill="currentColor">
+//         <path fillRule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clipRule="evenodd" />
+//       </svg>
+//     </button>
+//   </div>
+// );
 
-const SubmitStartupForm = ({ onClose }) => {
+interface SubmitStartupFormProps {
+  onClose: () => void;
+}
+
+const SubmitStartupForm: React.FC<SubmitStartupFormProps> = ({ onClose }) => {
   const [formData, setFormData] = useState({
     name: '',
     description: '',
@@ -35,7 +39,7 @@ const SubmitStartupForm = ({ onClose }) => {
     email: '',
   });
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = async (e: { preventDefault: () => void; }) => {
     e.preventDefault();
     try {
       await addDoc(collection(db, 'startups'), formData);
@@ -64,7 +68,7 @@ const SubmitStartupForm = ({ onClose }) => {
         <label htmlFor="description" className="block text-sm font-medium text-gray-700">Description</label>
         <textarea
           id="description"
-          rows="3"
+          rows={3}
           className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200 focus:ring-opacity-50"
           value={formData.description}
           onChange={(e) => setFormData({ ...formData, description: e.target.value })}
@@ -101,7 +105,14 @@ const SubmitStartupForm = ({ onClose }) => {
 };
 
 const Info = () => {
-  const [startups, setStartups] = useState([]);
+  interface Startup {
+    id: string;
+    name: string;
+    description: string;
+    website: string;
+  }
+  
+  const [startups, setStartups] = useState<Startup[]>([]);
   const [showSubmitForm, setShowSubmitForm] = useState(false);
 
   useEffect(() => {
@@ -114,18 +125,6 @@ const Info = () => {
 
   
 
-  const Briefcase = () => (
-    <svg xmlns="http://www.w3.org/2000/svg" className="h-12 w-12" viewBox="0 0 20 20" fill="currentColor">
-      <path fillRule="evenodd" d="M6 6V5a3 3 0 013-3h2a3 3 0 013 3v1h2a2 2 0 012 2v3.57A22.952 22.952 0 0110 13a22.95 22.95 0 01-8-1.43V8a2 2 0 012-2h2zm2-1a1 1 0 011-1h2a1 1 0 011 1v1H8V5zm1 5a1 1 0 011-1h.01a1 1 0 110 2H10a1 1 0 01-1-1z" clipRule="evenodd" />
-      <path d="M2 13.692V16a2 2 0 002 2h12a2 2 0 002-2v-2.308A24.974 24.974 0 0110 15c-2.796 0-5.487-.46-8-1.308z" />
-    </svg>
-  );
-
-  const Users = () => (
-    <svg xmlns="http://www.w3.org/2000/svg" className="h-12 w-12" viewBox="0 0 20 20" fill="currentColor">
-      <path d="M9 6a3 3 0 11-6 0 3 3 0 016 0zM17 6a3 3 0 11-6 0 3 3 0 016 0zM12.93 17c.046-.327.07-.66.07-1a6.97 6.97 0 00-1.5-4.33A5 5 0 0119 16v1h-6.07zM6 11a5 5 0 015 5v1H1v-1a5 5 0 015-5z" />
-    </svg>
-  );
 
   return (
     <div className="bg-gradient-to-b from-blue-50 to-white min-h-screen">
