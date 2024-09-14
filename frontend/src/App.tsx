@@ -10,6 +10,7 @@ import StartupDashboard from './Pages/Startup/Dashboard/Dashboard';
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import InvestorDashboard from './Pages/Investor/InvestorDashboard';
+import IPR from "./Pages/IPR/IPR"
 //comment for aryan raand on signal
 function App() {
   return (
@@ -33,7 +34,7 @@ function App() {
         <div className='md:relative'>
           <Routes>
             <Route path="/" element={<HomePage />} />
-            {/* <Route path="/ipr" element={<IprPage />} /> */}
+            <Route path="/ipr" element={<IPR />} />
             <Route path="/research" element={<ResearchPage />} />
             <Route path="/dashboard" element={<Dashboard />} />
             <Route path="/startup" element={<StartupPage />} />
