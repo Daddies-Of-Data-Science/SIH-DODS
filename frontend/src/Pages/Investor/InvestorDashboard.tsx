@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { PieChart, Pie, Cell, Tooltip, Legend, LineChart, Line, XAxis, YAxis, CartesianGrid,  ResponsiveContainer } from 'recharts';
 import { Button } from '@material-tailwind/react';
-import StartupFilterModal from '../../components/investor/StartupFilter';
+import StartupFilterModal from '../../Components/investor/StartupFilter';
 import { getDocs, collection } from 'firebase/firestore';
 import { db } from '../../fireBaseConfig';
 
