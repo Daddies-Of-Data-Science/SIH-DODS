@@ -5,6 +5,23 @@ import { collection, getDocs, doc, updateDoc, getDoc } from 'firebase/firestore'
 import { db } from '../../fireBaseConfig';
 import { toast } from 'react-toastify';
 
+interface IPRApplication {
+  id: string,
+  description: string,
+  title: string,
+  type: string,
+  createdAt: Date,
+  status: string
+}
+
+interface InvestmentApplication {
+  id: string,
+  startupName: string,
+  investmentAmount: Number,
+  investorName: string,
+  status: string
+}
+
 // Validation schemas
 const loginValidationSchema = Yup.object().shape({
   username: Yup.string().required('Username is required'),
@@ -70,22 +87,6 @@ const LandingPage = ({ onLogin } : LoginProps) => (
   </div>
 );
 
-interface IPRApplication {
-    id: string,
-    description: string,
-    title: string,
-    type: string,
-    createdAt: Date,
-    status: string
-}
-
-interface InvestmentApplication {
-    id: string,
-    startupName: string,
-    investmentAmount: Number,
-    investorName: string,
-    status: string
-}
 // IPR Management System Component
 const Admin = () => {
   const [iprapplications, setIprApplications] = useState<IPRApplication[]>([]);

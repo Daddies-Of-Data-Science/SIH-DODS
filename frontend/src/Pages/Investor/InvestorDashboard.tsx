@@ -5,21 +5,23 @@ import StartupFilterModal from '../../components/investor/StartupFilter';
 import { getDocs, collection } from 'firebase/firestore';
 import { db } from '../../fireBaseConfig';
 
-interface Investment {
-    startupId: string;
-    startupName: string;
-    investmentAmount: number;
+interface InvestmentApplication {
+  id: string,
+  startupName: string,
+  investmentAmount: Number,
+  investorName: string,
+  status: string
 };
 
 function InvestorDashboard() {
 const [isModalOpen, setIsModalOpen] = useState(false);
-const [investments, setInvestments] = useState<Investment[]>([]);
+const [investments, setInvestments] = useState<InvestmentApplication[]>([]);
 const [totalInvestment, setTotalInvestment] = useState<number>(0);
 
 const fetchInvestments = async () => {
   try {
     const query = await getDocs(collection(db, 'investments'));
-    const investmentsData = query.docs.map((doc) => ({...doc.data(),})) as Investment[];
+    const investmentsData = query.docs.map((doc) => ({id: doc.id, ...doc.data()})) as InvestmentApplication[];
     return investmentsData;
   } 
   catch (error) {
@@ -30,9 +32,10 @@ const fetchInvestments = async () => {
 
 useEffect(() => {
     const loadInvestments = async() =>{
-        const allInvestments = await fetchInvestments();
+        const fetchedInvestments = await fetchInvestments();
+        const allInvestments = fetchedInvestments.filter((inv => inv.status === "APPROVED"));
         setInvestments(allInvestments);
-        const total = allInvestments.reduce((sum, investment) => sum + investment.investmentAmount, 0);
+        const total = allInvestments.reduce((sum, investment) => sum + Number(investment.investmentAmount), 0);
         setTotalInvestment(total);
     }
     loadInvestments();
@@ -50,13 +53,13 @@ const pieData = investments.map((investment) => ({
 // ];
 
 const lineData = [
-{ day: 1, value: 140 },
-{ day: 5, value: 160 },
-{ day: 10, value: 180 },
-{ day: 15, value: 220 },
-{ day: 20, value: 260 },
-{ day: 25, value: 240 },
-{ day: 30, value: 180 },
+  { day: 1, value: 15000 },
+  { day: 5, value: 16000 },
+  { day: 10, value: 18000 },
+  { day: 15, value: 22034 },
+  { day: 20, value: 21000 },
+  { day: 25, value: 19000 },
+  { day: 30, value: 20000 },
 ];
 
 // const areaData = [
@@ -189,7 +192,18 @@ const notifications = [
                   {/* Display Total Investment in the Center */}
                   <text
                     x="50%"
-                    y="47%"
+                    y="43%"  // Adjusted to position above the total money text
+                    textAnchor="middle"
+                    dominantBaseline="middle"
+                    className="text-md font-semibold"
+                    fill="#333"
+                  >
+                    Total Investment:
+                  </text>
+                  {/* Display Total Investment in the Center */}
+                  <text
+                    x="50%"
+                    y="51%"  // Adjusted slightly for better alignment with the total money
                     textAnchor="middle"
                     dominantBaseline="middle"
                     className="text-xl font-semibold"
