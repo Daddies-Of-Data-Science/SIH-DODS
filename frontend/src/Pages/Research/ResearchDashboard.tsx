@@ -1,6 +1,6 @@
 
-import Topbar from "../../Components/research/dashboard/Topbar";
-import DashboardContent from "../../Components/research/dashboard/DashboardContent";
+import Topbar from "../../components/research/dashboard/Topbar";
+import DashboardContent from "../../components/research/dashboard/DashboardContent";
 
 const ReactDashboard: React.FC = () => {
   return (

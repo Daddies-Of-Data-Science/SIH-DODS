@@ -1,7 +1,7 @@
 import { BrowserRouter as Router, Routes, Route} from 'react-router-dom';
 // import IprPage from './pages/IprPage';
 import ResearchPage from './Pages/Research/Research'
-import { NavbarDefault } from './Components/Navbar';
+import { NavbarDefault } from './components/Navbar';
 import StartupPage from './Pages/Startup/Startup';
 import InvestorPage from './Pages/Investor/Investor';
 import HomePage from './Pages/Home/Home';
@@ -11,7 +11,7 @@ import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import InvestorDashboard from './Pages/Investor/InvestorDashboard';
 import IPR from "./Pages/IPR/IPR"
-import ScrollToTop from './Components/ScrollToTop';
+import ScrollToTop from './components/ScrollToTop';
 import AdminPage from './Pages/Admin/Admin';
 
 
