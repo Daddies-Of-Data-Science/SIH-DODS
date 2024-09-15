@@ -119,7 +119,7 @@ const notifications = [
     }
   };
 
-const COLORS = ['#0088FE', '#00C49F', '#FFBB28'];
+  const COLORS = ['#0088FE', '#00C49F', '#FFBB28', '#FF8042'];
 
   return (
     <div className="w-full px-4 md:px-10 flex flex-col gap-4 md:pt-24">
@@ -180,8 +180,8 @@ const COLORS = ['#0088FE', '#00C49F', '#FFBB28'];
                     dataKey="value"
                     label={({ name, percent }) => `${name}: ${(percent * 100).toFixed(2)}%`}
                   >
-                    {pieData.map(( index:any) => (
-                      <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
+                    {pieData.map((data: any, index:any) => (
+                      <Cell key={`cell-${data}`} fill={COLORS[index % COLORS.length]} />
                     ))}
                   </Pie>
                   <Tooltip />
