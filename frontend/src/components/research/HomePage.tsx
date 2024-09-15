@@ -1,18 +1,18 @@
-import React, { useState } from "react";
-import ProjectForm from "./ProjectForm";
+import React from "react";
+// import ProjectForm from "./ProjectForm";
 import { Link } from "react-router-dom";
 
 const HomePage: React.FC = () => {
 
-  const [isFormVisible, setFormVisible] = useState(false);
+  // const [isFormVisible, setFormVisible] = useState(false);
 
-  const handleFormToggle = () => {
-    setFormVisible(!isFormVisible);
-  };
+  // const handleFormToggle = () => {
+  //   setFormVisible(!isFormVisible);
+  // };
 
-  const handleCloseForm = () => {
-    setFormVisible(false);
-  };
+  // const handleCloseForm = () => {
+  //   setFormVisible(false);
+  // };
 
   return (
     <div className="">
@@ -89,7 +89,7 @@ const HomePage: React.FC = () => {
       </div> */}
 
       {/* Section 3: Revolutionize Research Section */}
-      <div className="flex items-center justify-center bg-white py-10 mt-10">
+      {/* <div className="flex items-center justify-center bg-white py-10 mt-10">
         <div className="grid grid-cols-1 md:grid-cols-2 w-full h-full gap-10">
           <div className="flex flex-col justify-center items-start px-8 md:px-24">
             <h2 className="text-4xl md:text-5xl font-bold text-gray-900">
@@ -115,8 +115,6 @@ const HomePage: React.FC = () => {
             />
           </div>
         </div>
-
-        {/* Conditionally render the ProjectForm as a fullscreen overlay */}
         {isFormVisible && (
           <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
             <div className="bg-white w-full max-w-3xl p-8 rounded-lg shadow-lg relative">
@@ -130,7 +128,7 @@ const HomePage: React.FC = () => {
             </div>
           </div>
         )}
-      </div>
+      </div> */}
     </div>
   );
 };

@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { Dialog, DialogHeader, DialogBody, DialogFooter, Button } from '@material-tailwind/react';
 import { toast } from 'react-toastify';
-import { collection, addDoc, updateDoc, doc } from 'firebase/firestore';
+import { collection, addDoc } from 'firebase/firestore';
 import { db } from "../../fireBaseConfig";
 
 interface InvestmentModalProps {
@@ -22,15 +22,18 @@ const InvestModal = ({ isOpen, onClose, startup, fetchStartups }: InvestmentModa
     if (startup && investmentAmount > 0) {
       const promise = async () => {
         try{
-            const startupRef = doc(db, 'startups', startup.id);
-            await updateDoc(startupRef, {
-              valuation: startup.valuation + investmentAmount,
-            });
+            // const startupRef = doc(db, 'startups', startup.id);
+            // await updateDoc(startupRef, {
+            //   valuation: startup.valuation + investmentAmount,
+            // });
+            // VALUATION UPDATE MOVED TO ADMIN PANEL 
 
             await addDoc(collection(db, 'investments'), {
               startupId: startup.id,
               startupName: startup.name,
               investmentAmount: investmentAmount,
+              investorName: "John Doe",
+              status: "IN REVIEW"
             });
         }
         catch(err){
@@ -42,7 +45,10 @@ const InvestModal = ({ isOpen, onClose, startup, fetchStartups }: InvestmentModa
         promise(),
         {
           pending: 'Investing...',
-          success: `Investment of ₹${investmentAmount.toLocaleString()} was successful!`,
+          success: {
+            render: `Investment of ₹${investmentAmount.toLocaleString()} has been sent to review!`,
+            type: 'info',
+          },
           error: 'Failed to invest. Please try again.',
         }
       );

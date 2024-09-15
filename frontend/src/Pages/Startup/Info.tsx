@@ -1,227 +1,197 @@
-import info1 from "../../assets/info_1png.png";
-import info2 from "../../assets/info_2.png";
-import info3 from "../../assets/info_3.png";
-import info4 from "../../assets/info_4.png";
-import info5 from "../../assets/info_5.png";
-import info6 from "../../assets/info_6.png";
-import  { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from "react-router-dom";
+import { collection, addDoc, getDocs } from 'firebase/firestore';
+import {db} from '../../fireBaseConfig';
+// Initialize Firebase (replace with your config)
 
-function Info() {
+
+// const FeatureCard = ({ icon: Icon, title, description }) => (
+//   <div className="bg-white p-6 rounded-lg shadow-md flex flex-col items-center text-center">
+//     <Icon className="h-12 w-12 text-blue-500 mb-2" />
+//     <h3 className="text-xl font-semibold mb-2">{title}</h3>
+//     <p className="text-gray-600">{description}</p>
+//   </div>
+// );
+
+// const StartupCard = ({ title, description, icon: Icon }) => (
+//   <div className="bg-black text-white p-6 rounded-lg shadow-md h-full flex flex-col">
+//     <Icon className="h-16 w-16 text-blue-400 mb-4" />
+//     <h3 className="text-2xl font-bold mb-2">{title}</h3>
+//     <p className="text-gray-300 flex-grow">{description}</p>
+//     <button className="text-blue-400 mt-4 flex items-center">
+//       Learn more 
+//       <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 ml-2" viewBox="0 0 20 20" fill="currentColor">
+//         <path fillRule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clipRule="evenodd" />
+//       </svg>
+//     </button>
+//   </div>
+// );
+
+interface SubmitStartupFormProps {
+  onClose: () => void;
+}
+
+const SubmitStartupForm: React.FC<SubmitStartupFormProps> = ({ onClose }) => {
+  const [formData, setFormData] = useState({
+    name: '',
+    description: '',
+    website: '',
+    email: '',
+  });
+
+  const handleSubmit = async (e: { preventDefault: () => void; }) => {
+    e.preventDefault();
+    try {
+      await addDoc(collection(db, 'startups'), formData);
+      onClose();
+      alert('Startup submitted successfully!');
+    } catch (error) {
+      console.error('Error submitting startup:', error);
+      alert('Error submitting startup. Please try again.');
+    }
+  };
+
+  return (
+    <form onSubmit={handleSubmit} className="space-y-4">
+      <div>
+        <label htmlFor="name" className="block text-sm font-medium text-gray-700">Startup Name</label>
+        <input
+          type="text"
+          id="name"
+          className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200 focus:ring-opacity-50"
+          value={formData.name}
+          onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+          required
+        />
+      </div>
+      <div>
+        <label htmlFor="description" className="block text-sm font-medium text-gray-700">Description</label>
+        <textarea
+          id="description"
+          rows={3}
+          className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200 focus:ring-opacity-50"
+          value={formData.description}
+          onChange={(e) => setFormData({ ...formData, description: e.target.value })}
+          required
+        ></textarea>
+      </div>
+      <div>
+        <label htmlFor="website" className="block text-sm font-medium text-gray-700">Website</label>
+        <input
+          type="url"
+          id="website"
+          className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200 focus:ring-opacity-50"
+          value={formData.website}
+          onChange={(e) => setFormData({ ...formData, website: e.target.value })}
+          required
+        />
+      </div>
+      <div>
+        <label htmlFor="email" className="block text-sm font-medium text-gray-700">Contact Email</label>
+        <input
+          type="email"
+          id="email"
+          className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200 focus:ring-opacity-50"
+          value={formData.email}
+          onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+          required
+        />
+      </div>
+      <button type="submit" className="w-full bg-blue-500 text-white py-2 px-4 rounded-md hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50">
+        Submit
+      </button>
+    </form>
+  );
+};
+
+const Info = () => {
+  interface Startup {
+    id: string;
+    name: string;
+    description: string;
+    website: string;
+  }
+  
+  const [startups, setStartups] = useState<Startup[]>([]);
   const [showSubmitForm, setShowSubmitForm] = useState(false);
 
-  const SubmitForm = () => (
-    <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4">
-      <div className="bg-white p-6 rounded-lg max-w-md w-full">
-        <h2 className="text-2xl font-bold mb-4">Submit Your Startup</h2>
-        <form className="space-y-4">
-          <input
-            className="w-full p-2 border rounded"
-            placeholder="Startup Name"
-          />
-          <textarea
-            className="w-full p-2 border rounded"
-            placeholder="Description"
-            rows={4}
-          />
-          <input className="w-full p-2 border rounded" placeholder="Website" />
-          <input
-            className="w-full p-2 border rounded"
-            placeholder="Contact Email"
-          />
-          <button
-            className="w-full bg-blue-500 text-white p-2 rounded hover:bg-blue-600"
-            type="submit"
-          >
-            Submit
-          </button>
-        </form>
-        <button
-          className="mt-4 text-gray-600"
-          onClick={() => setShowSubmitForm(false)}
-        >
-          Cancel
-        </button>
-      </div>
-    </div>
-  );
+  useEffect(() => {
+    const fetchStartups = async () => {
+      const querySnapshot = await getDocs(collection(db, 'startups'));
+      setStartups(querySnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() })) as Startup[]);
+    };
+    fetchStartups();
+  }, []);
+
+  
+
+
   return (
-    <div className="bg-[#FEFEFF]">
-      <div className=" bg-[#FEFEFF] text-center flex justify-center content-center">
-        <div className="text-5xl p-[4%] lg:w-[70vw] font-zilla">
-          Revolutionize Your Business with Innovative Startups
-        </div>
-      </div>
-      <div className="flex flex-row mx-[20%] gap-4 justify-between h-[30vh]">
-        <div className="w-[30%]">
-          <div className="flex justify-center content-center h-[30px] mb-5">
-            <img className="object-cover " src={info1} />
-          </div>
-          <div className="text-gray-500 text-center text-sm font-sans">
-            Discover groundbreaking solutions across industries
-          </div>
-        </div>
-        <div className="w-[25%]">
-          <div className="flex justify-center h-[30px] content-center mb-5">
-            <img className="object-cover " src={info2} />
-          </div>
-          <div className="text-gray-500 text-center text-sm font-sans">
-            Explore cutting-edge products and services
-          </div>
-        </div>
-        <div className="w-[30%]">
-          <div className="flex justify-center content-center h-[30px] mb-5">
-            <img className="object-cover " src={info3} />
-          </div>
-          <div className="text-gray-500 text-center text-sm font-sans">
-            Connect with forward-thinking founders
-          </div>
-        </div>
-      </div>
-      <div className="flex md:flex-row flex-none mx-[5%] gap-20 justify-between h-[80vh] ">
-        <div className="bg-black rounded-xl h-[70vh] w-1/3 p-4">
-          <div>
-            <img className="py-2  h-[70px]" src={info4} />
-          </div>
-          <div className="text-white font-zilla text-6xl pr-10 pb-4">
-            Gujarat Startups
-          </div>
-          <div className="text-gray-500 text-lg pb-4 ">
-            Based in the heart of the city, our directory showcases the most
-            promising startups shaping the future of New York. Discover
-            innovative solutions, pioneering technologies, and visionary
-            entrepreneurs that are transforming industries and driving
-            progress..
-          </div>
-          <div className="text-gray-400 text-xs ">Learn more</div>
-        </div>
-        <div className="bg-black rounded-xl h-[70vh] w-1/3 p-4">
-          <div>
-            <img className="py-2  h-[70px]" src={info5} />
-          </div>
-          <div className="text-white font-zilla text-6xl pr-10 pb-4">
-            GN Group Startups
-          </div>
-          <div className="text-gray-500 text-lg pb-4 overflow-hidden">
-            Headquartered in the global business hub, our platform features a
-            diverse array of startups from the GN Group ecosystem. Explore
-            cutting-edge technologies, disruptive business models, and
-            trailblazing founders that are redefining the landscape of
-            innovation...
-          </div>
-          <div className="text-gray-400 text-xs z-10">Learn more</div>
-        </div>
-        <div className="bg-black rounded-xl h-[70vh] w-1/3 p-4">
-          <div>
-            <img className="py-2  h-[70px]" src={info6} />
-          </div>
-          <div className="text-white font-zilla text-6xl">
-            Gujarat 
-          </div>
-          <div className="text-white font-zilla text-5xl pb-4">
-          Council Startups 
-          </div>
-          
-          <div className="text-gray-500 text-lg pb-4">
-            BImmerse yourself in the vibrant startup ecosystem of New York City.
-            Our platform showcases the most promising ventures, innovative
-            products, and visionary leaders that are shaping the future of the
-            city
-          </div>
-          <div className="text-gray-400 text-xs ">Learn more</div>
-        </div>
-      </div>
-      <div className="h-[50vh] w-full bg-blue-50">
-        <div className="text-center text-4xl font font-zilla pt-16 lg:px-[25vw]">
-          Elevate Your Business with Innovative Solutions{" "}
-        </div>
-        <div className="mt-10 lg:px-[20vw] text-gray-600 text-center">
-          Unlock the power of groundbreaking startups and innovative
-          technologies to propel your business forward. Our comprehensive
-          directory and detailed profiles provide the insights and connections
-          you need to stay ahead of the curve and capitalize on emerging
-          opportunities
-        </div>
-      </div>
-      <div className="bg-gray-100 p-8">
-        <div className="max-w-6xl mx-auto space-y-8">
-
-
-          <div className="grid md:grid-cols-2 gap-8">
-            <div className="p-6 rounded-lg">
-              <h2 className="text-2xl font-semibold mb-4">
-                Explore Diverse Startups
-              </h2>
-              <p className="mb-4">
-                Discover pioneering solutions across fintech, healthcare,
-                sustainability, and AI. Connect with visionary founders
-                transforming industries.
-              </p>
-              <button
-                onClick={() => setShowSubmitForm(true)}
-                className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600"
-              >
-                Submit your Startup
+    <div className="bg-gradient-to-b from-blue-50 to-white min-h-screen">
+      <section className="py-20">
+        <div className="container mx-auto px-4 text-center">
+          <h2 className="text-4xl font-bold mb-8">Elevate Your Business with Innovative Solutions</h2>
+          <p className="text-xl mb-12 max-w-3xl mx-auto">
+            Unlock the power of groundbreaking startups and innovative technologies to propel your business forward. Our comprehensive directory and detailed profiles provide the insights and connections you need to stay ahead of the curve.
+          </p>
+          <div className="flex justify-center space-x-4">
+            <button 
+              onClick={() => setShowSubmitForm(true)} 
+              className="bg-blue-500 text-white py-2 px-4 rounded-md hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50"
+            >
+              Submit your Startup
+            </button>
+            <Link to="/investor">
+              <button className="bg-white text-blue-500 border border-blue-500 py-2 px-4 rounded-md hover:bg-blue-50 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50">
+                Become an Investor
               </button>
-            </div>
+            </Link>
+          </div>
+        </div>
+      </section>
 
-            <div className=" p-6 rounded-lg">
-              <h2 className="text-2xl font-semibold mb-4">
-                Become an Investor Insider
-              </h2>
-              <p className="mb-4">
-                Gain exclusive access to curated startup profiles, pitch decks,
-                and investment opportunities.
-              </p>
-              <Link to="/investor">
-              <button className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">
-                Apply Now
-              </button>
-              </Link>
+
+      {startups.length > 0 && (
+        <section className="py-20">
+          <div className="container mx-auto px-4">
+            <h2 className="text-4xl font-bold text-center mb-12">Latest Startups</h2>
+            <div className="grid md:grid-cols-3 gap-8">
+              {startups.map((startup) => (
+                <div key={startup.id} className="bg-white p-6 rounded-lg shadow-md">
+                  <h3 className="text-xl font-semibold mb-2">{startup.name}</h3>
+                  <p className="text-gray-600 mb-4">{startup.description}</p>
+                  <a href={startup.website} target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline">
+                    Visit Website
+                  </a>
+                </div>
+              ))}
             </div>
           </div>
+        </section>
+      )}
 
-          {/* <div className="bg-navy-800 text-white p-6 rounded-lg shadow">
-            <h2 className="text-2xl font-semibold mb-4">
-              Unlock the Power of Innovation
-            </h2>
-            <div className="flex space-x-4">
-              <button className="bg-white text-navy-800 px-4 py-2 rounded hover:bg-gray-200 flex items-center">
-                <Activity className="mr-2" />
-                Explore
-              </button>
-              <button className="bg-white text-navy-800 px-4 py-2 rounded hover:bg-gray-200 flex items-center">
-                <DollarSign className="mr-2" />
-                Invest
-              </button>
-              <button
-                onClick={() => setShowSubmitForm(true)}
-                className="bg-white text-navy-800 px-4 py-2 rounded hover:bg-gray-200 flex items-center"
-              >
-                <Send className="mr-2" />
-                Submit Startup
-              </button>
-            </div>
-          </div> */}
-
-          <div className="bg-white p-6 rounded-lg shadow">
-            <h2 className="text-2xl font-semibold mb-4">
-              Stay Ahead of the Curve with Innovative Startups
-            </h2>
-            <p>
-              Browse our comprehensive directory of cutting-edge startups and
-              connect with the visionaries shaping the future of your industry.
-            </p>
+      {showSubmitForm && (
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4">
+          <div className="bg-white p-6 rounded-lg max-w-md w-full">
+            <h2 className="text-2xl font-bold mb-4">Submit Your Startup</h2>
+            <SubmitStartupForm onClose={() => setShowSubmitForm(false)} />
+            <button
+              onClick={() => setShowSubmitForm(false)}
+              className="mt-4 text-gray-600 hover:text-gray-800"
+            >
+              Cancel
+            </button>
           </div>
         </div>
+      )}
 
-        {showSubmitForm && <SubmitForm />}
-      </div>
-      {/* <div className="text-5xl">
-        WORK IN PROGRESS....
-      </div> */}
+      <footer className="bg-gray-800 text-white py-10">
+        <div className="container mx-auto px-4 text-center">
+          <p>&copy; 2024 Startup Directory. All rights reserved.</p>
+        </div>
+      </footer>
     </div>
   );
-}
+};
 
 export default Info;
