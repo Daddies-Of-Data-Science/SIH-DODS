@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { Dialog, DialogHeader, DialogBody, DialogFooter, Button } from '@material-tailwind/react';
 import { toast } from 'react-toastify';
-import { collection, addDoc, updateDoc, doc } from 'firebase/firestore';
+import { collection, addDoc } from 'firebase/firestore';
 import { db } from "../../fireBaseConfig";
 
 interface InvestmentModalProps {

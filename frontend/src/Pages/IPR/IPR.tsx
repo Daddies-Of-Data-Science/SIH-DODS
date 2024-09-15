@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
-import { collection, addDoc, getDocs, doc, updateDoc } from 'firebase/firestore';
+import { collection, addDoc, getDocs } from 'firebase/firestore';
 import { db } from '../../fireBaseConfig';
 
 // Validation schemas
@@ -19,8 +19,12 @@ const iprValidationSchema = Yup.object().shape({
 // Dummy credentials
 const validCredentials = { username: 'admin', password: 'password' };
 
+type LoginProps = {
+  onLogin: () => void
+}
+
 // Landing Page Component
-const LandingPage = ({ onLogin }) => (
+const LandingPage = ({ onLogin }: LoginProps) => (
   <div className="min-h-screen flex flex-col justify-between bg-blue-50 text-black">
     <div className="container mx-auto px-4 py-12">
       <header className="text-center mb-12">
@@ -95,9 +99,18 @@ const LandingPage = ({ onLogin }) => (
   </div>
 );
 
+interface IPRApplication {
+  id: string,
+  description: string,
+  title: string,
+  type: string,
+  createdAt: Date,
+  status: string
+}
+
 // IPR Management System Component
 const IPR = () => {
-  const [applications, setApplications] = useState([]);
+  const [applications, setApplications] = useState<IPRApplication[]>([]);
 
   React.useEffect(() => {
     fetchApplications();
@@ -105,10 +118,10 @@ const IPR = () => {
 
   const fetchApplications = async () => {
     const querySnapshot = await getDocs(collection(db, "iprApplications"));
-    setApplications(querySnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() })));
+    setApplications(querySnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() })) as IPRApplication[]);
   };
 
-  const handleSubmit = async (values, { setSubmitting, resetForm }) => {
+  const handleSubmit = async (values: any, { setSubmitting, resetForm }: any) => {
     try {
       await addDoc(collection(db, "iprApplications"), {
         ...values,
@@ -121,15 +134,6 @@ const IPR = () => {
       console.error("Error adding document: ", error);
     }
     setSubmitting(false);
-  };
-
-  const updateStatus = async (id, newStatus) => {
-    try {
-      await updateDoc(doc(db, "iprApplications", id), { status: newStatus });
-      fetchApplications();
-    } catch (error) {
-      console.error("Error updating document: ", error);
-    }
   };
 
   return (
@@ -172,6 +176,30 @@ const IPR = () => {
               </Form>
             )}
           </Formik>
+        </div>
+
+        <div className="bg-white p-6 rounded-lg shadow-md">
+          <h2 className="text-2xl font-semibold mb-4 text-gray-800">All IPR Applications</h2>
+          <div className="overflow-x-auto">
+            <table className="w-full table-auto">
+              <thead>
+                <tr className="bg-gray-200 text-gray-600 uppercase text-sm leading-normal">
+                  <th className="py-3 px-6 text-left">Title</th>
+                  <th className="py-3 px-6 text-left">Type</th>
+                  <th className="py-3 px-6 text-left">Status</th>
+                </tr>
+              </thead>
+              <tbody className="text-gray-600 text-sm font-light">
+                {applications.map((app:any) => (
+                  <tr key={app.id} className="border-b border-gray-200 hover:bg-gray-100">
+                    <td className="py-3 px-6 text-left whitespace-nowrap">{app.title}</td>
+                    <td className="py-3 px-6 text-left">{app.type}</td>
+                    <td className="py-3 px-6 text-left">{app.status}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
         </div>
         
       </div>

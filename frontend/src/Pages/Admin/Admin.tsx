@@ -1,21 +1,14 @@
 import React, { useState } from 'react';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
-import { collection, addDoc, getDocs, doc, updateDoc, getDoc } from 'firebase/firestore';
+import { collection, getDocs, doc, updateDoc, getDoc } from 'firebase/firestore';
 import { db } from '../../fireBaseConfig';
-import { MdDescription } from 'react-icons/md';
 import { toast } from 'react-toastify';
 
 // Validation schemas
 const loginValidationSchema = Yup.object().shape({
   username: Yup.string().required('Username is required'),
   password: Yup.string().required('Password is required'),
-});
-
-const iprValidationSchema = Yup.object().shape({
-  title: Yup.string().required('Title is required').min(3, 'Title must be at least 3 characters'),
-  description: Yup.string().required('Description is required').min(10, 'Description must be at least 10 characters'),
-  type: Yup.string().required('Type is required').oneOf(['patent', 'trademark', 'copyright'], 'Invalid type selected'),
 });
 
 // Dummy credentials
@@ -86,15 +79,6 @@ interface IPRApplication {
     status: string
 }
 
-interface IPRApplication {
-    id: string,
-    description: string,
-    title: string,
-    type: string,
-    createdAt: Date,
-    status: string
-}
-
 interface InvestmentApplication {
     id: string,
     startupName: string,
@@ -115,14 +99,14 @@ const Admin = () => {
   const fetchIPRApplications = async () => {
     const querySnapshot = await getDocs(collection(db, "iprApplications"));
     const applications = querySnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() })) as IPRApplication[];
-    applications.sort((a, b) => (a.status === "IN REVIEW" ? -1 : 1));
+    applications.sort((a) => (a.status === "IN REVIEW" ? -1 : 1));
     setIprApplications(applications);
   };
 
   const fetchInvestmentApplications = async () => {
     const querySnapshot = await getDocs(collection(db, "investments"));
     const investments = querySnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() })) as InvestmentApplication[];
-    investments.sort((a, b) => (a.status === "IN REVIEW" ? -1 : 1));
+    investments.sort((a) => (a.status === "IN REVIEW" ? -1 : 1));
     setInvestments(investments);
   };
 

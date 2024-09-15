@@ -118,7 +118,7 @@ const Info = () => {
   useEffect(() => {
     const fetchStartups = async () => {
       const querySnapshot = await getDocs(collection(db, 'startups'));
-      setStartups(querySnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() })));
+      setStartups(querySnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() })) as Startup[]);
     };
     fetchStartups();
   }, []);
