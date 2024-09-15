@@ -1,6 +1,6 @@
 
-import HomePage from "../../Components/research/HomePage";
-import ResearchPapers from "../../Components/research/ResearchPaper";
+import HomePage from "../../components/research/HomePage";
+import ResearchPapers from "../../components/research/ResearchPaper";
 
 const Research = () => {
   return <div>

@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { db } from '../../fireBaseConfig'; 
 import { collection, addDoc, getDocs, updateDoc, doc } from 'firebase/firestore';
-import FilterByAreaOfResearch from './Filter';
-import GrantRequestForm from './GrantRequest';
+import FilterByAreaOfResearch from '../../components/research/Filter';
+import GrantRequestForm from '../../components/research/GrantRequest';
 
 type Status = 'in-progress' | 'in-review' | 'published';
 
