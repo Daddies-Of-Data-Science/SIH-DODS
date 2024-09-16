@@ -11,6 +11,7 @@ interface InvestmentModalProps {
     id: string;
     name: string;
     valuation: number;
+    industry: string;
   } | null;
   fetchStartups: () => void;
 }
@@ -32,6 +33,7 @@ const InvestModal = ({ isOpen, onClose, startup, fetchStartups }: InvestmentModa
               startupId: startup.id,
               startupName: startup.name,
               investmentAmount: investmentAmount,
+              industry: startup.industry,
               investorName: "John Doe",
               status: "IN REVIEW"
             });
