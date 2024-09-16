@@ -181,7 +181,7 @@ const Home: React.FC = () => {
                 "As a startup founder, having all our KPIs and investor
                 communications in one place has been a lifesaver."
               </p>
-              <p className="font-bold text-blue-600">-Saankh</p>
+              <p className="font-bold text-blue-600">- Advait Sankhe</p>
             </motion.div>
 
             <motion.div
@@ -192,7 +192,7 @@ const Home: React.FC = () => {
                 "Investing in innovation has never been easier. The real-time
                 insights and market trends are top-notch!"
               </p>
-              <p className="font-bold text-blue-600">- Raju</p>
+              <p className="font-bold text-blue-600">- Aryan Rajpurkar</p>
             </motion.div>
           </div>
         </div>
