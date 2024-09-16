@@ -79,7 +79,7 @@ const Admin = () => {
   const fetchIPRApplications = async () => {
     const querySnapshot = await getDocs(collection(db, 'iprApplications'));
     const applications = querySnapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() })) as IPRApplication[];
-    applications.sort((a) => (a.status === 'Pending' ? -1 : 1));
+    applications.sort((a) => (a.status === 'IN REVIEW' ? -1 : 1));
     setIprApplications(applications);
 
     const q = query(collection(db, 'iprApplications'), where('status', '==', 'APPROVED'));
@@ -124,7 +124,7 @@ const Admin = () => {
       ...doc.data(),
       dateRequested: doc.data().dateRequested.toDate(),
     })) as GrantRequest[];
-    grants.sort((a) => (a.status === 'pending' ? -1 : 1));
+    grants.sort((a) => (a.status === 'IN REVIEW' ? -1 : 1));
     let approvedGrants = 0;
     let totalGrantAmount = 0;
 
@@ -234,15 +234,15 @@ const Admin = () => {
       <div className="max-w-6xl mx-auto">
         <h1 className="text-3xl font-bold text-gray-800 mb-8 text-center">Admin Dashboard</h1>
 
-        <div className='w-full flex flex-row gap-8'>
+        <div className='w-full flex flex-row lg:gap-8 gap-4  flex-col lg:flex-row'>
           {/* Charts */}
-          <div className="w-1/2 bg-white p-6 rounded-lg shadow-md mb-8">
+          <div className="lg:w-1/2 w-full bg-white p-6 rounded-lg shadow-md mb-8 ">
             <h2 className="text-2xl font-semibold mb-4 text-gray-800">Application Overview</h2>
             <Bar data={chartData} options={{ responsive: true, plugins: { legend: { display: true } } }} />
           </div>
 
           {/* General Statistics Chart */}
-          <div className="w-1/2 bg-white p-6 rounded-lg shadow-md mb-8">
+          <div className="lg:w-1/2 w-full bg-white p-6 rounded-lg shadow-md mb-8">
             <h2 className="text-2xl font-semibold mb-4 text-gray-800">General Statistics</h2>
             <Bar data={generalStatsData} options={{ responsive: true, plugins: { legend: { display: true } } }} />
           </div>
@@ -254,14 +254,14 @@ const Admin = () => {
           <div className="w-full flex flex-row md:flex-nowrap flex-wrap gap-8">
 
             {/* Pie Chart for Investments by Industry */}
-            <div className="w-2/3 md:flex-nowrap flex-1">
+            <div className="w-2/3 lg:w-auto lg:h-[70vh] md:flex-nowrap flex-1">
               {Object.keys(investmentByIndustry).length > 0 ? (
                 <Pie data={investmentByIndustryData} options={{ responsive: true, plugins: { legend: { display: true } } }} />
               ) : (
                 <p className="text-center text-gray-500">No investment data available.</p>
               )}
             </div>
-            <div className='w-1/3 flex flex-col gap-5'>
+            <div className='lg:w-1/3 w-full flex flex-col gap-5'>
               {/* Total Approved Investments */}
               <div className="flex-1 bg-green-100 p-4 rounded-lg shadow flex flex-col justify-center items-center text-center">
                 <h3 className="text-lg font-semibold text-green-800">Total Approved Investments</h3>
@@ -303,22 +303,18 @@ const Admin = () => {
                     <td className="py-3 px-6">{app.type}</td>
                     <td className="py-3 px-6">{app.status}</td>
                     <td className="py-3 px-6">
-                    {app.status === 'Pending' &&
                       <button
                         onClick={() => updateIPRStatus(app.id, 'APPROVED')}
                         className="bg-green-500 text-white px-3 py-1 rounded"
                       >
                         Approve
                       </button>
-                    }
-                    {app.status === 'Pending' &&
                       <button
                         onClick={() => updateIPRStatus(app.id, 'REJECTED')}
                         className="bg-red-500 text-white px-3 py-1 rounded ml-2"
                       >
                         Reject
                       </button>
-                    }
                     </td>
                   </tr>
                 ))}
@@ -347,22 +343,18 @@ const Admin = () => {
                     <td className="py-3 px-6">₹{investment.investmentAmount.toLocaleString()}</td>
                     <td className="py-3 px-6">{investment.status}</td>
                     <td className="py-3 px-6">
-                      {investment.status === 'IN REVIEW' && 
-                        <button
-                          onClick={() => updateInvestmentStatus(investment.id, 'APPROVED', investment.investmentAmount, investment.startupName)}
-                          className="bg-green-500 text-white px-3 py-1 rounded"
-                        >
-                          Approve
-                        </button>
-                      }
-                      {investment.status === 'IN REVIEW' && 
-                        <button
-                          onClick={() => updateInvestmentStatus(investment.id, 'REJECTED')}
-                          className="bg-red-500 text-white px-3 py-1 rounded ml-2"
-                        >
-                          Reject
-                        </button>
-                      }
+                      <button
+                        onClick={() => updateInvestmentStatus(investment.id, 'APPROVED', investment.investmentAmount, investment.startupName)}
+                        className="bg-green-500 text-white px-3 py-1 rounded"
+                      >
+                        Approve
+                      </button>
+                      <button
+                        onClick={() => updateInvestmentStatus(investment.id, 'REJECTED')}
+                        className="bg-red-500 text-white px-3 py-1 rounded ml-2"
+                      >
+                        Reject
+                      </button>
                     </td>
                   </tr>
                 ))}
@@ -391,22 +383,18 @@ const Admin = () => {
                     <td className="py-3 px-6">₹{grant.grantAmount.toLocaleString()}</td>
                     <td className="py-3 px-6">{grant.status}</td>
                     <td className="py-3 px-6">
-                    {grant.status === 'pending' &&
                       <button
                         onClick={() => updateGrantStatus(grant.id, 'APPROVED')}
                         className="bg-green-500 text-white px-3 py-1 rounded"
                       >
                         Approve
                       </button>
-                    }
-                    {grant.status === 'pending' &&
                       <button
                         onClick={() => updateGrantStatus(grant.id, 'REJECTED')}
                         className="bg-red-500 text-white px-3 py-1 rounded ml-2"
                       >
                         Reject
                       </button>
-                    }
                     </td>
                   </tr>
                 ))}
