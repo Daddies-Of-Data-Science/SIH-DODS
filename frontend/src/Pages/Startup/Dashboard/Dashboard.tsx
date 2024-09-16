@@ -1,6 +1,6 @@
 
 import { LineChart, Line, PieChart, Pie, Cell, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
-import {  Search, Bell } from 'lucide-react';
+import { Bell } from 'lucide-react';
 
 const mockValuationData = [
   { day: 1, value: 15000 },
