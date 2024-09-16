@@ -21,22 +21,22 @@ const storage= getStorage(app);
 // const analytics = getAnalytics(app);
 
 
-document.addEventListener("DOMContentLoaded", () => {
-  const messageElement = document.createElement("div");
-  messageElement.innerText = "Firebase has been successfully connected";
-  messageElement.style.position = "fixed";
-  messageElement.style.bottom = "10px";
-  messageElement.style.right = "10px";
-  messageElement.style.backgroundColor = "green";
-  messageElement.style.color = "white";
-  messageElement.style.padding = "10px";
-  messageElement.style.borderRadius = "5px";
-  document.body.appendChild(messageElement);
+// document.addEventListener("DOMContentLoaded", () => {
+//   const messageElement = document.createElement("div");
+//   messageElement.innerText = "Firebase has been successfully connected";
+//   messageElement.style.position = "fixed";
+//   messageElement.style.bottom = "10px";
+//   messageElement.style.right = "10px";
+//   messageElement.style.backgroundColor = "green";
+//   messageElement.style.color = "white";
+//   messageElement.style.padding = "10px";
+//   messageElement.style.borderRadius = "5px";
+//   document.body.appendChild(messageElement);
 
  
-  setTimeout(() => {
-    document.body.removeChild(messageElement);
-  }, 10000); 
-});
+//   setTimeout(() => {
+//     document.body.removeChild(messageElement);
+//   }, 10000); 
+// });
 
 export { db , storage };
