@@ -5,13 +5,12 @@ import { getStorage } from 'firebase/storage';
 
 
 const firebaseConfig = {
-  apiKey: "AIzaSyDiH3c0KZeIbt4ppBOFGiHeM8fR_Y1aSzY",
-  authDomain: "sih-dods.firebaseapp.com",
-  projectId: "sih-dods",
-  storageBucket: "sih-dods.appspot.com",
-  messagingSenderId: "159446482414",
-  appId: "1:159446482414:web:8a32dcdb34497ee25822ff",
-  measurementId: "G-LXY4JDXPHN"
+  apiKey: "AIzaSyAmZv3qGasPVW8VyLFtgqrvuD5xyuLP1nA",
+  authDomain: "sih-dods-1ee09.firebaseapp.com",
+  projectId: "sih-dods-1ee09",
+  storageBucket: "sih-dods-1ee09.appspot.com",
+  messagingSenderId: "6777312524",
+  appId: "1:6777312524:web:b38c64b58bfd4f8d94e529"
 };
 
 
