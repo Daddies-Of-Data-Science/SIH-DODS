@@ -158,10 +158,11 @@ const Admin = () => {
   };
 
   // Update Investment Status
-  const updateInvestmentStatus = async (id: string, newStatus: string) => {
+  const updateInvestmentStatus = async (id: string, newStatus: string, amount?:number, name?:string) => {
     try {
       await updateDoc(doc(db, 'investments', id), { status: newStatus });
       fetchInvestmentApplications();
+      toast.success(`Sucessfully Approved Investment of ₹${amount} for ${name}`)
     } catch (error) {
       console.error('Error updating document: ', error);
     }
@@ -172,6 +173,7 @@ const Admin = () => {
     try {
       await updateDoc(doc(db, 'iprApplications', id), { status: newStatus });
       fetchIPRApplications();
+      toast.success('IPR status updated successfully!');
     } catch (error) {
       console.error('Error updating document: ', error);
     }
@@ -342,7 +344,7 @@ const Admin = () => {
                     <td className="py-3 px-6">{investment.status}</td>
                     <td className="py-3 px-6">
                       <button
-                        onClick={() => updateInvestmentStatus(investment.id, 'APPROVED')}
+                        onClick={() => updateInvestmentStatus(investment.id, 'APPROVED', investment.investmentAmount, investment.startupName)}
                         className="bg-green-500 text-white px-3 py-1 rounded"
                       >
                         Approve
