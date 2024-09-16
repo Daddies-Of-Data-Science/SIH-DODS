@@ -70,7 +70,7 @@ const Admin = () => {
     fetchGrants();
     fetchTotalStartups();
     fetchTotalResearchPapers();
-  }, [totalStartups, grants, investments, iprApplications, totalResearchPapers]);
+  }, []);
 
   useEffect(() => {
     console.log("Updated Industry Graph:", investmentByIndustry);  // Log after state is updated
