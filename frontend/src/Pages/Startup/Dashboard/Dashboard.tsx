@@ -27,13 +27,12 @@ const StartupDashboard = () => {
       <div className="flex justify-between items-center mb-6">
         <div className="flex space-x-4">
           <button className="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600">Dashboard</button>
-          <button className="px-4 py-2 bg-gray-200 text-gray-700 rounded hover:bg-gray-300">My Investments</button>
         </div>
         <div className="flex items-center space-x-4">
-          <div className="relative">
+          {/* <div className="relative">
             <input type="text" placeholder="Search..." className="pl-10 pr-4 py-2 border rounded-full" />
             <Search className="absolute left-3 top-2.5 h-5 w-5 text-gray-400" />
-          </div>
+          </div> */}
           <button className="p-2 rounded-full hover:bg-gray-200">
             <Bell className="h-5 w-5" />
           </button>
@@ -52,7 +51,6 @@ const StartupDashboard = () => {
         </div>
         <div className="flex justify-end gap-3">
           <button className="px-4 py-2 bg-purple-100 text-purple-800 rounded">PRE SEED</button>
-          <button className="px-4 py-2 bg-green-500 text-white rounded hover:bg-green-600">Find Investors</button>
         </div>
       </div>
 
